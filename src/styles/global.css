@@ -41,3 +41,29 @@ span.text-peach {
     box-sizing: border-box;
     display: block;
 }
+
+.button-bg-gradient {
+    border: none;
+    text-decoration: none;
+    background: linear-gradient(90deg, #FF4C2E 0%, #FF7D67 100%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 12px 32px;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    box-sizing: border-box;
+    display: block;
+}
+
+input[type="text"] {
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 18px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--color-grey-light);
+}

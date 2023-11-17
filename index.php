@@ -8,7 +8,7 @@ $actions = explode("/", $path);
 //var_dump($actions);
 
 if($actions[0] === 'login') {
-    var_dump("login", __DIR__);
+    //var_dump("login", __DIR__);
     include(__DIR__."/src/views/login.html");
 }
 
