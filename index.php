@@ -12,6 +12,11 @@ if($actions[0] === 'login') {
     include(__DIR__."/src/views/login.html");
 }
 
+if($actions[0] === 'register') {
+    //var_dump("login", __DIR__);
+    include(__DIR__."/src/views/register.html");
+}
+
 if($actions[0] === 'dashboard') {
     var_dump("dashboard");
     include(__DIR__."/src/views/dashboard.html");
@@ -19,4 +24,8 @@ if($actions[0] === 'dashboard') {
 
 if($actions[0] === 'welcome') {
     include(__DIR__."/src/views/welcome.html");
+}
+
+if($actions[0] === 'home') {
+    include(__DIR__."/src/views/home.html");
 }
