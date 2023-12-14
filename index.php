@@ -29,3 +29,7 @@ if($actions[0] === 'welcome') {
 if($actions[0] === 'home') {
     include(__DIR__."/src/views/home.html");
 }
+
+if($actions[0] === 'result') {
+    include(__DIR__."/src/views/result.html");
+}

@@ -71,35 +71,26 @@ header {
     gap: 32px;
 }
 
-.recommended-recipes, .recent-recipes {
-    width: 100%;
-}
-
-.recipe-grid-title {
-    font-weight: 700;
-    margin: 24px;
-}
-
 .recipe-grid {
-    width: 100%;
+    display: flex;
 }
 
 .recipe-card {
-    background: var(--color-peach);
+
+    background: white;
     border-radius: 10px;
-    padding: 10px 10px 10px 10px;
+    padding: 0 0 20px 0;
+    width: 230px;
 }
 
-.recipe-thumbnail {
-    width: 100%;
-    aspect-ratio: 1.1/1;
-    height: auto;
-    border-radius: 10px;
+.recipe-picture {
+    border-radius:  10px 10px 0 0;
+    width: 230px;
 }
+
 
 .recipe-meta {
-    display: flex;
-    flex-direction: column;
+
 }
 
 .recipe-title {
@@ -125,7 +116,6 @@ header {
 }
 
 .recipe-info-icon {
-    filter: invert(1);
     height: 38px;
 }
 
