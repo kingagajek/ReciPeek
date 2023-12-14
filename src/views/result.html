@@ -24,7 +24,127 @@
         </div>
     </header>
 
-    <div class="option-buttons"></div>
+    <div class="option-buttons">
+        <select class="sort-button" name="sort" id="sort">
+            <option value="rating-ASC">Rating: highest to lowest</option>
+            <option value="rating-DESC">Rating: lowest to highest</option>
+            <option value="time-ASC">Preparation time: highest to lowest</option>
+            <option value="time-DESC">Preparation time: lowest to highest</option>
+            <option value="ingredients-ASC">Total ingredients: lowest to highest</option>
+            <option value="ingredients-DESC">Total ingredients: lowest to highest</option>
+            <option value="difficulty-ASC">Difficulty: lowest to highest</option>
+            <option value="difficulty-DESC">Difficulty: lowest to highest</option>
+        </select>
+
+        <button class="filter-button" id=filter-button>Filter</button>
+        <div class="filter-menu" id="filter-menu" style="display:none;">  
+
+            <div class="meal-type">
+                <button>Meal Type</button>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <label for="breakfast">Breakfast</label>
+                        <input type="checkbox" id="breakfast" name="breakfast">
+                    </div>
+                    <div class="filter-option">
+                        <label for="brunch">Brunch</label>
+                        <input type="checkbox" id="brunch" name="brunch">
+                    </div>
+                    <div class="filter-option">
+                        <label for="lunch">Lunch</label>
+                        <input type="checkbox" id="lunch" name="lunch">
+                    </div>
+                    <div class="filter-option">
+                        <label for="dinner">Dinner</label>
+                        <input type="checkbox" id="dinner" name="dinner">
+                    </div>
+                    <div class="filter-option">
+                        <label for="dessert">Dessert</label>
+                        <input type="checkbox" id="dessert" name="dessert">
+                    </div>
+                    <div class="filter-option">
+                        <label for="supper">Supper</label>
+                        <input type="checkbox" id="supper" name="supper">
+                    </div>
+                    <div class="filter-option">
+                        <label for="snack">Snack</label>
+                        <input type="checkbox" id="snack" name="snack">
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-time">
+                <button>Total time</button>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <label for="under-15m">Under 15 minutes</label>
+                        <input type="checkbox" id="under-15m" name="under-15m">
+                    </div>
+                    <div class="filter-option">
+                        <label for="under-30m">Under 30 minutes</label>
+                        <input type="checkbox" id="under-30m" name="under-30m">
+                    </div>
+                    <div class="filter-option">
+                        <label for="under-45m">Under 45 minutes</label>
+                        <input type="checkbox" id="under-45m" name="under-45m">
+                    </div>
+                    <div class="filter-option">
+                        <label for="under-1h">Under 1 hour</label>
+                        <input type="checkbox" id="under-1h" name="under-1h">
+                    </div>
+                    <div class="filter-option">
+                        <label for="more-than-1h">1 hour or more</label>
+                        <input type="checkbox" id="more-than-1h" name="more-than-1h">
+                    </div>
+                </div>
+            </div>
+
+            <div class="difficulty">
+                <button>Difficulty</button>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <label for="easy">Easy</label>
+                        <input type="checkbox" id="easy" name="easy">
+                    </div>
+                    <div class="filter-option">
+                        <label for="more-effort">More-effort</label>
+                        <input type="checkbox" id="more-effort" name="more-effort">
+                    </div>
+                    <div class="filter-option">
+                        <label for="challenge">A challenge</label>
+                        <input type="checkbox" id="challenge" name="challenge">
+                    </div>
+                </div>
+            </div>
+ 
+            </select>
+
+            <label for="ratings">Ratings</label>
+            <select class="ratings" name="ratings" id="ratings">
+ 
+            </select>
+
+            <label for="additional-ingredients">Number of additional ingredients</label>
+            <select class="additional-ingredients" name="additional-ingredients" id="additional-ingredients">
+            
+            </select>
+
+            <label for="diet">Diet</label>
+            <select class="diet" name="diet" id="diet">
+ 
+            </select>
+
+            <label for="cuisine">Cuisine</label>
+            <select class="cuisine" name="cuisine" id="cuisine">
+ 
+            </select>
+
+        </div>
+
+        <select class="ingredients-button" name="ingredients" id="ingredients">
+
+        </select>
+    </div>
 
     <div class="recipe-grid">
         
@@ -119,6 +239,6 @@
         </div>
     </div>
     
-    
+    <script type="text/javascript" src="src\scripts\checkboxes.js"></script>
 </body>
 </html>
