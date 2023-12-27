@@ -61,6 +61,44 @@ header {
     border-radius: 1.5px;
 }
 
+.sort-button {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 8px;
+    font-weight: 800px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+}
+
+.filter-button {
+    background-color: var(--color-grey-dark);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 8px;
+    font-weight: 800px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.ingredients-button {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 8px;
+    font-weight: 800px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    color: var(--color-peach);
+}
+
 .main-container {
     display: flex;
     width: 100%;
