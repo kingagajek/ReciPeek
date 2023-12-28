@@ -38,7 +38,7 @@
                     <img class="recipe-thumbnail" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
                     <div class="recipe-meta">
                         <div class="recipe-title">
-                            <div class="recipe-raiting">
+                            <div class="recipe-rating">
                                 <img class="star-icon" src="src\images\star.png" alt="star-icon">
                                 <span>4.5</span>
                             </div>
@@ -66,7 +66,7 @@
                     <img class="recipe-thumbnail" src="src\images\chicken-wrap.jpg" alt="Pumpkin soup">
                     <div class="recipe-meta">
                         <div class="recipe-title">
-                            <div class="recipe-raiting">
+                            <div class="recipe-rating">
                                 <img class="star-icon" src="src\images\star.png" alt="star-icon">
                                 <span>4.5</span>
                             </div>

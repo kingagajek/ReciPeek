@@ -259,7 +259,7 @@
                             <span>easy</span>
                         </div>
                     </div>
-                    <div class="recipe-raiting">
+                    <div class="recipe-rating">
                         <img class="star-icon" src="src\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
@@ -282,7 +282,7 @@
                             <span>easy</span>
                         </div>
                     </div>
-                    <div class="recipe-raiting">
+                    <div class="recipe-rating">
                         <img class="star-icon" src="src\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
@@ -304,7 +304,7 @@
                             <span>easy</span>
                         </div>
                     </div>
-                    <div class="recipe-raiting">
+                    <div class="recipe-rating">
                         <img class="star-icon" src="src\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
@@ -327,7 +327,7 @@
                             <span>easy</span>
                         </div>
                     </div>
-                    <div class="recipe-raiting">
+                    <div class="recipe-rating">
                         <img class="star-icon" src="src\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>

@@ -2,6 +2,11 @@
 
 require 'Routing.php';
 
+require_once 'Database.php';
+
+$database = new Database();
+$database->test();
+
 $path = trim($_SERVER['REQUEST_URI'], '/');
 $path = parse_url($path, PHP_URL_PATH);
 
