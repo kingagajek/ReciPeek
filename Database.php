@@ -1,5 +1,6 @@
 <?php
 
+require_once 'config.php';
 class Database {
     private $username;
     private $password;
@@ -8,10 +9,10 @@ class Database {
 
     public function __construct()
     {
-        $this->username = "Kinga";
-        $this->password = "docker";
-        $this->host = "db";
-        $this->database = "database";
+        $this->username = USERNAME;
+        $this->password = PASSWORD;
+        $this->host = HOST;
+        $this->database = DATABASE;
     }
 
     public function connect()
@@ -31,19 +32,5 @@ class Database {
         catch(PDOException $e) {
             die("Connection failed: " . $e->getMessage());
         }
-    }
-
-    public function test()
-    {
-        $stmt = $this->connect()->prepare('
-            SELECT * FROM public.users
-        ');
-
-//        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        var_dump($user);
     }
 }

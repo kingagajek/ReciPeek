@@ -14,18 +14,8 @@ class User {
         return $this->email;
     }
 
-    public function setEmail(): string
-    {
-        $this->email = $email;
-    }
-
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function setPassword(): string
-    {
-        $this->password = $password;
     }
 }
