@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="src\styles\global.css">
-    <link rel="stylesheet" href="src\styles\recipe.css">
+    <link rel="stylesheet" href="public\styles\global.css">
+    <link rel="stylesheet" href="public\styles\recipe.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReciPeek result</title>
 </head>
 <body>
     <header>
-        <img class="logo" src="src\images\logo.svg" alt="logo">
+        <img class="logo" src="public\images\logo.svg" alt="logo">
         <div class="search-container">
-            <img class="search-icon" src="src\images\search.svg" alt="search-icon">
+            <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
         </div>
         <div class="header-buttons">
-            <img class="profile" src="src\images\profile.svg" alt="profile">
+            <img class="profile" src="public\images\profile.svg" alt="profile">
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -26,29 +26,30 @@
 
     <div class="main-container">
         <div class="main-info">
-            <img class="recipe-picture" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
+            <?php foreach($recipes as $recipe): ?>
+<!--            <img class="recipe-picture" src="public/uploads/--><?php //= $recipe->getImage() ?><!--" alt="Chicken wrap">-->
             <div class="main-info-text">
-                <h1>Chicken wrap</h1>
+                <h1><?= $recipe->getTitle() ?></h1>
                 <div class="recipe-rating">
-                    <img class="star-icon" src="src\images\star.png" alt="star-icon">
+                    <img class="star-icon" src="public\images\star.png" alt="star-icon">
                     <span>58 ratings</span>
                 </div>
                 <div class="recipe-info">
                     <div class="time-info">
-                        <img class="recipe-info-icon" src="src\images\time.svg" alt="time-icon">
+                        <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
                         <span> 30 mins</span>
                     </div>
                     <div class="difficulty-info">
-                        <img class="recipe-info-icon" src="src\images\difficulty.svg" alt="difficulty-icon">
+                        <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                         <span>easy</span>
                     </div>
                     <div class="portion-info">
-                        <img class="recipe-info-icon" src="src\images\portion.svg" alt="portion-icon">
+                        <img class="recipe-info-icon" src="public\images\portion.svg" alt="portion-icon">
                         <span>2 portion</span>
                     </div>
                 </div>
                 <p class="recipe-description">
-                    Marinate chicken in yogurt, lemon and allspice before char-grilling and wrapping in flatbread with salad for a light and delicious midweek meal
+<!--                    --><?php //= $recipe->getDescription() ?>
                 </p>
                 <div class="nutrition-info">
                     <h3>Nutrition:</h3>
@@ -119,6 +120,7 @@
                 </ol>
             </div>
         </div>
+        <?php endforeach; ?>
     </div>
 </body>
 </html>

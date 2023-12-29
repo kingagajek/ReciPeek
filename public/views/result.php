@@ -233,11 +233,8 @@
             </div>
 
             <button class="ingredients-button" id=ingredients-button>Your ingredients</button>
-            <div class="ingredients-menu" id="ingredients-menu" style="display:none;">  
+            <div class="ingredients-menu" id="ingredients-menu" style="display:none;">
 
-                <div class="meal-type">
-                    
-                </div>
             </div>
 
         </div>

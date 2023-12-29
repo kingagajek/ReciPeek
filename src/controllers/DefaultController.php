@@ -25,7 +25,12 @@ class DefaultController extends AppController {
     }
 
     public function recipe() {
-        //TODO display projects.html
+        //TODO display recipes.html
         $this->render('recipe');
+    }
+
+    public function add_recipe() {
+        //TODO display recipes.html
+        $this->render('add-recipe');
     }
 }
