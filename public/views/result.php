@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="src\styles\global.css">
-    <link rel="stylesheet" href="src\styles\result.css">
+    <link rel="stylesheet" href="public\styles\global.css">
+    <link rel="stylesheet" href="public\styles\result.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReciPeek result</title>
 </head>
 <body>
     <header>
-        <img class="logo" src="src\images\logo.svg" alt="logo">
+        <img class="logo" src="public\images\logo.svg" alt="logo">
         <div class="search-container">
-            <img class="search-icon" src="src\images\search.svg" alt="search-icon">
+            <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
         </div>
         <div class="header-buttons">
-            <img class="profile" src="src\images\profile.svg" alt="profile">
+            <img class="profile" src="public\images\profile.svg" alt="profile">
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -242,22 +242,22 @@
         <div class="recipe-grid">
             
             <div class="recipe-card">
-                <img class="recipe-picture" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
+                <img class="recipe-picture" src="public\images\chicken-wrap.jpg" alt="Chicken wrap">
                 <div class="recipe-meta">
                     <h3 class="recipe-title">Chicken wrap</h3>
                     <p class="recipe-description">This warming vegan soup is made using juicy, ripe tomatoes, which come into season around September.</p>
                     <div class="recipe-info">
                         <div class="time-info">
-                            <img class="recipe-info-icon" src="src\images\time.svg" alt="time-icon">
+                            <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
                             <span> 30 mins</span>
                         </div>
                         <div class="difficulty-info">
-                            <img class="recipe-info-icon" src="src\images\difficulty.svg" alt="difficulty-icon">
+                            <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                             <span>easy</span>
                         </div>
                     </div>
                     <div class="recipe-rating">
-                        <img class="star-icon" src="src\images\star.png" alt="star-icon">
+                        <img class="star-icon" src="public\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
                 </div>
@@ -265,44 +265,44 @@
 
             
             <div class="recipe-card">
-                <img class="recipe-picture" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
+                <img class="recipe-picture" src="public\images\chicken-wrap.jpg" alt="Chicken wrap">
                 <div class="recipe-meta">
                     <h3 class="recipe-title">Chicken wrap</h3>
                     <p class="recipe-description">This warming vegan soup is made using juicy, ripe tomatoes, which come into season around September.</p>
                     <div class="recipe-info">
                         <div class="time-info">
-                            <img class="recipe-info-icon" src="src\images\time.svg" alt="time-icon">
+                            <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
                             <span> 30 mins</span>
                         </div>
                         <div class="difficulty-info">
-                            <img class="recipe-info-icon" src="src\images\difficulty.svg" alt="difficulty-icon">
+                            <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                             <span>easy</span>
                         </div>
                     </div>
                     <div class="recipe-rating">
-                        <img class="star-icon" src="src\images\star.png" alt="star-icon">
+                        <img class="star-icon" src="public\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
                 </div>
             </div>
             
             <div class="recipe-card">
-                <img class="recipe-picture" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
+                <img class="recipe-picture" src="public\images\chicken-wrap.jpg" alt="Chicken wrap">
                 <div class="recipe-meta">
                     <h3 class="recipe-title">Chicken wrap</h3>
                     <p class="recipe-description">This warming vegan soup is made using juicy, ripe tomatoes, which come into season around September.</p>
                     <div class="recipe-info">
                         <div class="time-info">
-                            <img class="recipe-info-icon" src="src\images\time.svg" alt="time-icon">
+                            <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
                             <span> 30 mins</span>
                         </div>
                         <div class="difficulty-info">
-                            <img class="recipe-info-icon" src="src\images\difficulty.svg" alt="difficulty-icon">
+                            <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                             <span>easy</span>
                         </div>
                     </div>
                     <div class="recipe-rating">
-                        <img class="star-icon" src="src\images\star.png" alt="star-icon">
+                        <img class="star-icon" src="public\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
                 </div>
@@ -310,28 +310,28 @@
             
 
             <div class="recipe-card">
-                <img class="recipe-picture" src="src\images\chicken-wrap.jpg" alt="Chicken wrap">
+                <img class="recipe-picture" src="public\images\chicken-wrap.jpg" alt="Chicken wrap">
                 <div class="recipe-meta">
                     <h3 class="recipe-title">Chicken wrap</h3>
                     <p class="recipe-description">This warming vegan soup is made using juicy, ripe tomatoes, which come into season around September.</p>
                     <div class="recipe-info">
                         <div class="time-info">
-                            <img class="recipe-info-icon" src="src\images\time.svg" alt="time-icon">
+                            <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
                             <span> 30 mins</span>
                         </div>
                         <div class="difficulty-info">
-                            <img class="recipe-info-icon" src="src\images\difficulty.svg" alt="difficulty-icon">
+                            <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                             <span>easy</span>
                         </div>
                     </div>
                     <div class="recipe-rating">
-                        <img class="star-icon" src="src\images\star.png" alt="star-icon">
+                        <img class="star-icon" src="public\images\star.png" alt="star-icon">
                         <span>4.5</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="src\scripts\checkboxes.js"></script>
+    <script type="text/javascript" src="public\scripts\checkboxes.js"></script>
 </body>
 </html>

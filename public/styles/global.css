@@ -57,7 +57,7 @@ span.text-peach {
     display: block;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
     border: none;
     border-radius: 8px;
     width: 100%;

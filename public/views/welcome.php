@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="src\styles\global.css">
-    <link rel="stylesheet" href="src\styles\welcome.css">
+    <link rel="stylesheet" href="public\styles\global.css">
+    <link rel="stylesheet" href="public\styles\welcome.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to ReciPeek</title>
 </head>
 <body>
     <div class="main-container"> 
-        <img class="logo" src="src\images\logo.svg" alt="logo">
+        <img class="logo" src="public\images\logo.svg" alt="logo">
         <div class="welcome-message">
             <h1>Welcome to Reci<span class="text-peach">Peek</span></h1>
             <h2>Find your personalized recipe by one click</h2>

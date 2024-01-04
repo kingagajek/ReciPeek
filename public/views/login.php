@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="src\styles\global.css">
-    <link rel="stylesheet" href="src\styles\login.css">
+    <link rel="stylesheet" href="public\styles\global.css">
+    <link rel="stylesheet" href="public\styles\login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in to ReciPeek</title>
@@ -10,7 +10,7 @@
 <body>
     <div class="login-container">
         <div class="logo-container">
-            <img class="logo" src="src\images\logo.svg" alt="logo">
+            <img class="logo" src="public\images\logo.svg" alt="logo">
             <h1> Reci<span class="text-peach">Peek</span></h1>
         </div>
         <div class="form-container">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-inputs">
                     <input type="text" placeholder="E-mail" name="email" required>
-                    <input type="text" placeholder="Password" name="password" required>
+                    <input type="password" placeholder="Password" name="password" required>
                 </div>
                 <div class="checkbox-container">
                     <input type="checkbox" id="remember-user" name="remember-user">

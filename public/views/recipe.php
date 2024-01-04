@@ -27,7 +27,7 @@
     <div class="main-container">
         <div class="main-info">
             <?php foreach($recipes as $recipe): ?>
-<!--            <img class="recipe-picture" src="public/uploads/--><?php //= $recipe->getImage() ?><!--" alt="Chicken wrap">-->
+            <img class="recipe-picture" src="public/uploads/<?= $recipe->getImage() ?>" alt="Chicken wrap">
             <div class="main-info-text">
                 <h1><?= $recipe->getTitle() ?></h1>
                 <div class="recipe-rating">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <p class="recipe-description">
-<!--                    --><?php //= $recipe->getDescription() ?>
+                    <?= $recipe->getDescription() ?>
                 </p>
                 <div class="nutrition-info">
                     <h3>Nutrition:</h3>

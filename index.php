@@ -11,7 +11,7 @@ Routing::get('home', 'DefaultController');
 Routing::get('register', 'DefaultController');
 Routing::get('welcome', 'DefaultController');
 Routing::get('result', 'DefaultController');
-Routing::get('recipe', 'DefaultController');
+Routing::get('recipe', 'RecipeController');
 Routing::post('login', 'SecurityController');
 Routing::post('addRecipe', 'RecipeController');
 

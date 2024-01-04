@@ -45,4 +45,25 @@ s WHERE id = :id
 //            $assignedById
         ]);
     }
+
+    public function getRecipes(): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM recipes;
+        ');
+        $stmt->execute();
+        $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($recipes as $recipe) {
+            $result[] = new Recipe(
+                $recipe['title'],
+                $recipe['description'],
+                $recipe['image']
+            );
+        }
+
+        return $result;
+    }
 }

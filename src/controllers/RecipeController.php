@@ -20,6 +20,11 @@ class RecipeController extends AppController
         $this->recipeRepository = new RecipeRepository();
     }
 
+    public function recipe() {
+        $recipes = $this->recipeRepository->getRecipes();
+        $this->render('recipe', ['recipes' => $recipes]);
+    }
+
     public function addRecipe()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['image']['tmp_name']) && $this->validate($_FILES['image'])) {
@@ -32,7 +37,10 @@ class RecipeController extends AppController
             $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name']);
             $this->recipeRepository->addRecipe($recipe);
 
-            return $this->render('recipe', ['messages' => $this->message]);
+            return $this->render('recipe', [
+                'messages' => $this->message,
+                'recipes' => $this->recipeRepository->getRecipes()
+            ]);
         }
         return $this->render('add-recipe', ['messages' => $this->message]);
     }
