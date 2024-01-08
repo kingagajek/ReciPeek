@@ -16,6 +16,24 @@ header {
 
 .search-container {
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-container {
+    position: absolute;
+    right: 8px;
+    margin-left: 8px;
+}
+
+.dropdown-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 35px; /* Adjust the height as necessary */
+    border-left: 1px solid #ccc; /* This creates the vertical line */
 }
 
 .search-icon {
@@ -26,8 +44,17 @@ header {
     left: 8px;
 }
 
+.dropdown-container select {
+    padding: 5px;
+    border: none;
+    background-color: #fff;
+    color: var(--color-grey-dark);
+    cursor: pointer;
+}
+
 .search {
-    width: 700px;
+    width: calc(700px - 120px);
+    flex-grow: 1;
     border: none;
     border-radius: 12px;
     background: #FFF;

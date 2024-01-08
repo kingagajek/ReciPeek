@@ -5,12 +5,16 @@ class Recipe
     private $title;
     private $description;
     private $image;
+    private $rating;
+    private $id;
 
-    public function __construct($title, $description, $image)
+    public function __construct($title, $description, $image, $rating = 0, $id = null)
     {
         $this->title = $title;
         $this->description = $description;
         $this->image = $image;
+        $this->rating = $rating;
+        $this->id = $id;
     }
 
     public function getTitle()
@@ -41,5 +45,30 @@ class Recipe
     public function setImage(string $image)
     {
         $this->image = $image;
+    }
+
+    public function getLike(): int
+    {
+        return $this->like;
+    }
+
+    public function setLike(int $like): void
+    {
+        $this->like = $like;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getRating()
+    {
+        return $this->rating;
     }
 }

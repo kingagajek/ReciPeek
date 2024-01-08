@@ -19,6 +19,12 @@
         <div class="search-container">
             <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
+            <div class="dropdown-container">
+                <select id="search-type" name="search-type">
+                    <option value="by_recipe">By recipe</option>
+                    <option value="by_ingredients">By ingredients</option>
+                </select>
+            </div>
         </div>
         <div class="header-buttons">
             <img class="profile" src="public\images\profile.svg" alt="profile">

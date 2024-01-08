@@ -16,7 +16,8 @@ class Routing {
     }
 
     public static function run($url) {
-        $action = explode("/", $url )[0];
+        $urlParts = explode("/", $url);
+        $action = $urlParts[0];
 
         if(!array_key_exists($action, self::$routes)) {
             die("Wrong url!");
@@ -24,6 +25,9 @@ class Routing {
 
         $controller = self::$routes[$action];
         $object = new $controller;
+        $action = $action ?: 'index';
+
+        $id = $urlParts[1] ?? '';
 
         $object->$action();
     }

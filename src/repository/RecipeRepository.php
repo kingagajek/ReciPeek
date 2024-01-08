@@ -51,7 +51,7 @@ s WHERE id = :id
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM recipes;
+            SELECT * FROM recipes ORDER BY id;
         ');
         $stmt->execute();
         $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,10 +60,55 @@ s WHERE id = :id
             $result[] = new Recipe(
                 $recipe['title'],
                 $recipe['description'],
-                $recipe['image']
+                $recipe['image'],
+                $recipe['rating'],
+                $recipe['id']
             );
         }
 
         return $result;
+    }
+
+    public function getRecipeByTitle(string $searchString)
+    {
+        $searchString = '%' . strtolower($searchString) . '%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM recipes WHERE LOWER(title) LIKE :search OR LOWER(description) LIKE :search
+        ');
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function rate(int $id, int $rating) {
+        $select_stmt = $this->database->connect()->prepare('
+            SELECT rating FROM recipes WHERE id = '.$id.'
+         ');
+
+        $select_stmt->execute();
+        $current_ratings = $select_stmt->fetch(PDO::FETCH_ASSOC)['rating'];
+
+        if (!$current_ratings) {
+            $new_ratings = array(
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0,
+            );
+        } else {
+            $new_ratings = unserialize($current_ratings);
+        }
+
+        if (array_key_exists($rating, $new_ratings)) $new_ratings[$rating] += 1;
+
+        $stmt = $this->database->connect()->prepare("
+            UPDATE recipes SET rating = '".serialize($new_ratings)."' WHERE id = ".$id."
+         ");
+        $stmt->execute();
+
+        return $new_ratings;
     }
 }

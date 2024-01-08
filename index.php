@@ -14,5 +14,7 @@ Routing::get('result', 'DefaultController');
 Routing::get('recipe', 'RecipeController');
 Routing::post('login', 'SecurityController');
 Routing::post('addRecipe', 'RecipeController');
+Routing::post('search', 'RecipeController');
+Routing::get('rate', 'RecipeController');
 
 Routing::run($path);

@@ -45,6 +45,28 @@ class RecipeController extends AppController
         return $this->render('add-recipe', ['messages' => $this->message]);
     }
 
+    public function search()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->recipeRepository->getRecipeByTitle($decoded['search']));
+        }
+    }
+
+    public function rate() {
+        $id = $_GET['id'];
+        $rating = $_GET['rating'];
+
+        echo json_encode($this->recipeRepository->rate($id, $rating));
+    }
+
     private function validate(array $file): bool
     {
         if ($file['size'] > self::MAX_FILE_SIZE) {

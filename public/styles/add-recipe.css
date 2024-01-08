@@ -72,7 +72,7 @@ header {
     margin: 0 auto;
 }
 
-.main-info {
+.main-info-form {
     align-items: stretch;
     background-color: white;
     display: flex;
@@ -88,7 +88,7 @@ header {
     border-radius: 10px;
 }
 
-.main-info-text {
+.main-info-text-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,25 +96,67 @@ header {
     flex-grow: 1;
 }
 
-h1 {
+.recipe-title {
     display: flex;
     align-items: center;
     font-weight: 500;
 }
 
-.recipe-description {
-    font-weight: 400;
+.recipe-info {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    justify-content: space-between;
 }
 
-.recipe-rating {
+.recipe-info-icon {
+    height: 38px;
+}
+
+.recipe-info-item-form {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.star-icon {
-    height: 38px;
+.recipe-description-form {
+    font-weight: 400;
 }
+
+.nutrition-form h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.nutrition-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.nutrition-inputs input {
+    flex: 1; /* Makes inputs take equal space */
+    min-width: 100px; /* Minimum width of the inputs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Styles for the submit button */
+.submit-button {
+    background-color: #fa8072; /* Change to match your theme color */
+    color: white;
+    padding: 12px 24px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 
 .recipe-info {
     display: flex;

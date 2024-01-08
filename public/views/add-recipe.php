@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\recipe.css">
-    <link rel="stylesheet" href="public\styles\add-recipe.css">
+    <script type="text/javascript" src="./public/scripts/dynamic-form.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReciPeek result</title>
@@ -33,47 +33,77 @@
         }
         ?>
         <!-- Step 1: Recipe Information -->
-        <div class="recipe-info-form step-1-of-3">
-            <div class="upload-image">
-                <!-- Image upload input -->
-                <input type="file" name="image" accept="image/*">
+        <div class="main-info">
+            <div class="image-upload-container">
+<!--                <input type="file" name="image" accept="image/*">-->
+                <label for="file-upload" class="image-upload-label">
+                    <div class="image-upload-plus">+</div>
+                    <div class="image-upload-text">Upload image</div>
+                </label>
+                <input id="file-upload" type="file" name="image" accept="image/*" style="display: none;"/>
             </div>
-            <div class="recipe-details">
-                <!-- Recipe title input -->
-                <input type="text" name="title" placeholder="Recipe name..." required>
-                <!-- Recipe description input -->
-                <textarea name="description" placeholder="Add recipe description..." required></textarea>
-                <!-- Additional details: Time, Difficulty, Portions -->
-                <input type="text" name="time" placeholder="Total time...">
-                <input type="text" name="difficulty" placeholder="Difficulty...">
-                <input type="number" name="portions" placeholder="Portions..." min="1">
+            <div class="main-info-text">
+                <input class="recipe-title" type="text" name="title" placeholder="Recipe name..." required>
+                <div class="recipe-info">
+                    <div class="recipe-info-item">
+                        <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
+                        <input type="number" name="time" placeholder="Total time(mins)..." min="1" required>
+                    </div>
+                    <div class="recipe-info-item">
+                        <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
+                        <select type="text" name="difficulty" placeholder="Difficulty..." required>
+                            <option value="">Select difficulty...</option>
+                            <option value="easy">Easy</option>
+                            <option value="more_effort">More effort</option>
+                            <option value="challenge">A challenge</option>
+                        </select>
+                    </div>
+                    <div class="recipe-info-item">
+                        <img class="recipe-info-icon" src="public\images\portion.svg" alt="portion-icon">
+                        <input type="number" name="portions" placeholder="Portions..." min="1">
+                    </div>
+                </div>
+                <textarea class="recipe-description" name="description" placeholder="Add recipe description..." required></textarea>
+
+                <div class="nutrition-info">
+                    <h3>Nutrition (optional):</h3>
+                    <div class="nutrition-details">
+                        <input type="number" name="kcal" placeholder="kcal..." min="0">
+                        <input type="number" name="fat" placeholder="fat (g)..." min="0" step="0.1">
+                        <input type="number" name="saturates" placeholder="saturates (g)..." min="0" step="0.1">
+                        <input type="number" name="carbs" placeholder="carbs (g)..." min="0" step="0.1">
+                        <input type="number" name="sugars" placeholder="sugars (g)..." min="0" step="0.1">
+                        <input type="number" name="fibre" placeholder="fibre (g)..." min="0" step="0.1">
+                        <input type="number" name="protein" placeholder="protein (g)..." min="0" step="0.1">
+                        <input type="number" name="salt" placeholder="salt (g)..." min="0" step="0.01">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Step 2: Ingredients -->
-        <div class="ingredients-form step-2-of-3">
-            <h2>Ingredients</h2>
-            <!-- Dynamically add ingredient fields using JavaScript or server-side rendering -->
-            <!-- Example ingredient field -->
-            <div class="ingredient-item">
-                <input type="text" name="ingredients[]" placeholder="Ingredient...">
+        <div class="recipe-content">
+            <!-- Step 2: Ingredients -->
+            <div class="ingredients">
+                <h2>Ingredients</h2>
+                <div id="ingredients-list">
+                    <div class="ingredient-item">
+                        <input type="text" name="ingredients[]" placeholder="Ingredient..." class="ingredient-input">
+                    </div>
+                </div>
+                <button type="button" id="add-ingredient-btn">Add Ingredient</button>
             </div>
-            <!-- Add more ingredient fields as needed -->
-        </div>
 
-        <!-- Step 3: Instructions -->
-        <div class="instructions-form step-3-of-3">
-            <h2>Instructions</h2>
-            <!-- Dynamically add instruction steps using JavaScript or server-side rendering -->
-            <!-- Example instruction step field -->
-            <div class="instruction-step">
-                <textarea name="instructions[]" placeholder="Step 1: Preheat your oven..."></textarea>
+            <!-- Step 3: Instructions -->
+            <div class="instructions">
+                <h2>Instructions</h2>
+                <div id="instructions-list">
+
+                </div>
+                <button type="button" id="add-instruction-btn">Add Step</button>
             </div>
-            <!-- Add more instruction steps as needed -->
         </div>
-
         <!-- Submit Button -->
-        <button type="submit">Submit Recipe</button>
+        <button type="submit" class="submit-button button-bg-gradient">Submit Recipe</button>
     </form>
 </body>
 </html>
