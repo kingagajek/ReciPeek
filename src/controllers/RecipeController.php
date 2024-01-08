@@ -33,8 +33,18 @@ class RecipeController extends AppController
                 dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['image']['name']
             );
 
+            $nutrition = [
+                "calories" => $_POST['calories'],
+                "fat" => $_POST['fat'],
+                "saturated_fat" => $_POST['saturated_fat'],
+                "carbohydrates" => $_POST['carbohydrates'],
+                "sugars" => $_POST['sugars'],
+                "fiber" => $_POST['fiber'],
+                "protein" => $_POST['protein'],
+                "salt" => $_POST['salt']
+            ];
             // TODO create new recipe object and save it in database
-            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name']);
+            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name'], $_POST['cook_time'], $_POST['serving_size'], $nutrition, $_POST['instructions']);
             $this->recipeRepository->addRecipe($recipe);
 
             return $this->render('recipe', [

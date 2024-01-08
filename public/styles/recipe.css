@@ -80,12 +80,55 @@ header {
     border-radius: 15px;
 }
 
+
 .recipe-picture {
     width: 30%;
     min-width: 200px;
     max-width: 350px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.image-preview-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-preview {
+    display: block;
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+}
+
+.change-image-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(3px);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.change-image-button:hover {
+    opacity: 1;
 }
 
 .image-upload-container {
@@ -117,12 +160,10 @@ header {
     font-size: 18px;
 }
 
-/* Change background color when hovering */
 .image-upload-label:hover {
     background-color: #e0e0e0;
 }
 
-/* Hide the actual file input */
 #file-upload {
     display: none;
 }
@@ -323,9 +364,10 @@ h1, .recipe-title {
 }
 
 .instruction-input {
+    flex-grow: 2;
     border: none;
     border-radius: 8px;
-    /*width: calc(100% - .step-label);*/
+    height: auto;
     box-sizing: border-box;
     padding: 14px 14px;
     font-size: 12px;
@@ -334,9 +376,8 @@ h1, .recipe-title {
 }
 
 .step-label {
-    flex-grow: 1;
     font-weight: bold;
-    /*margin-right: 10px;*/
+    margin-right: 5px;
 }
 
 .instruction-step {

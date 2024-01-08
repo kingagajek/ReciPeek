@@ -1,5 +1,32 @@
-document.querySelector('.image-upload-label').addEventListener('click', function() {
-    document.getElementById('file-upload').click();
+document.addEventListener('DOMContentLoaded', () => {
+    const fileUpload = document.getElementById('file-upload');
+    const imageUploadContainer = document.querySelector('.image-preview-container');
+    const imageUploadLabel = document.querySelector('.image-upload-label');
+
+    fileUpload.addEventListener('change', function(event) {
+        const [file] = event.target.files;
+        if (file) {
+            // const imageContainer = document.createElement('div');
+            // imageContainer.classList.add('image-preview-container');
+
+            const imageTag = document.createElement('img');
+            imageTag.classList.add('image-preview');
+            imageTag.src = URL.createObjectURL(file);
+            imageTag.onload = () => URL.revokeObjectURL(imageTag.src);
+
+            const changeButton = document.createElement('button');
+            changeButton.textContent = 'CHANGE IMAGE';
+            changeButton.classList.add('change-image-button');
+            changeButton.type = 'button';
+            changeButton.onclick = () => fileUpload.click();
+
+            imageUploadContainer.innerHTML = '';
+            imageUploadContainer.appendChild(imageTag);
+            imageUploadContainer.appendChild(changeButton);
+            // imageUploadContainer.appendChild(imageContainer);
+            imageUploadLabel.style.display = 'none';
+        }
+    });
 });
 document.addEventListener('DOMContentLoaded', () => {
     const ingredientsList = document.getElementById('ingredients-list');

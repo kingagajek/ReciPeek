@@ -25,7 +25,7 @@
         </div>
     </header>
 
-    <form class="main-container" action="addRecipe" method="post" ENCTYPE="multipart/form-data">
+    <form class="main-container" method="post" ENCTYPE="multipart/form-data">
         <?php if(isset($messages)) {
             foreach ($messages as $message) {
                 echo $message;
@@ -36,6 +36,9 @@
         <div class="main-info">
             <div class="image-upload-container">
 <!--                <input type="file" name="image" accept="image/*">-->
+                <div class="image-preview-container">
+
+                </div>
                 <label for="file-upload" class="image-upload-label">
                     <div class="image-upload-plus">+</div>
                     <div class="image-upload-text">Upload image</div>
@@ -47,7 +50,7 @@
                 <div class="recipe-info">
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
-                        <input type="number" name="time" placeholder="Total time(mins)..." min="1" required>
+                        <input type="number" name="cook_time" placeholder="Total time(mins)..." min="1" required>
                     </div>
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
@@ -60,7 +63,7 @@
                     </div>
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\portion.svg" alt="portion-icon">
-                        <input type="number" name="portions" placeholder="Portions..." min="1">
+                        <input type="number" name="serving_size" placeholder="Portions..." min="1">
                     </div>
                 </div>
                 <textarea class="recipe-description" name="description" placeholder="Add recipe description..." required></textarea>
@@ -68,12 +71,12 @@
                 <div class="nutrition-info">
                     <h3>Nutrition (optional):</h3>
                     <div class="nutrition-details">
-                        <input type="number" name="kcal" placeholder="kcal..." min="0">
+                        <input type="number" name="calories" placeholder="kcal..." min="0">
                         <input type="number" name="fat" placeholder="fat (g)..." min="0" step="0.1">
-                        <input type="number" name="saturates" placeholder="saturates (g)..." min="0" step="0.1">
-                        <input type="number" name="carbs" placeholder="carbs (g)..." min="0" step="0.1">
+                        <input type="number" name="saturated_fat" placeholder="saturates (g)..." min="0" step="0.1">
+                        <input type="number" name="carbohydrates" placeholder="carbs (g)..." min="0" step="0.1">
                         <input type="number" name="sugars" placeholder="sugars (g)..." min="0" step="0.1">
-                        <input type="number" name="fibre" placeholder="fibre (g)..." min="0" step="0.1">
+                        <input type="number" name="fiber" placeholder="fiber (g)..." min="0" step="0.1">
                         <input type="number" name="protein" placeholder="protein (g)..." min="0" step="0.1">
                         <input type="number" name="salt" placeholder="salt (g)..." min="0" step="0.01">
                     </div>

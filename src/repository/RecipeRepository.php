@@ -22,29 +22,69 @@ s WHERE id = :id
         return new Recipe (
             $recipe['title'],
             $recipe['description'],
-            $recipe['image']
+            $recipe['image'],
+            $recipe['cook_time'],
+            $recipe['serving_size'],
+            $recipe['rating'],
+            $recipe['id']
         );
     }
 
     public function addRecipe(Recipe $recipe): void
     {
         $date = new DateTime();
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO "recipes" (title, description, image, created_at)
-            VALUES (?, ?, ?, ?)
-        ');
+        $db = $this->database->connect();
+        $db->beginTransaction();
 
-        //TODO you should get this value from logged user session
-        $assignedById = 1;
+        try {
+            $stmt = $db->prepare('
+                INSERT INTO "recipes" (title, description, image, cook_time, serving_size, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ');
+            $stmt->execute([
+                $recipe->getTitle(),
+                $recipe->getDescription(),
+                $recipe->getImage(),
+                $recipe->getCookTime(),
+                $recipe->getServingSize(),
+                $date->format('Y-m-d'),
+            ]);
+            $recipeId = $db->lastInsertId();
 
-        $stmt->execute([
-            $recipe->getTitle(),
-            $recipe->getDescription(),
-            $recipe->getImage(),
-            $date->format('Y-m-d'),
-//            $assignedById
-        ]);
+            $stmt = $db->prepare('
+                INSERT INTO "nutrition" (id_recipe, calories, fat, saturated_fat, carbohydrates, sugars, fiber, protein, salt)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ');
+            $nutrition = $recipe->getNutrition();
+            $stmt->execute([
+                $recipeId,
+                $nutrition['calories'],
+                $nutrition['fat'],
+                $nutrition['saturated_fat'],
+                $nutrition['carbohydrates'],
+                $nutrition['sugars'],
+                $nutrition['fiber'],
+                $nutrition['protein'],
+                $nutrition['salt'],
+            ]);
+
+            foreach ($recipe->getInstructions() as $instruction) {
+                $stmt = $db->prepare('
+                    INSERT INTO "instructions" (id_recipe, step)
+                    VALUES (?, ?)
+                ');
+                $stmt->execute([
+                    $recipeId,
+                    $instruction,
+                ]);
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
     }
+
 
     public function getRecipes(): array
     {
@@ -61,6 +101,8 @@ s WHERE id = :id
                 $recipe['title'],
                 $recipe['description'],
                 $recipe['image'],
+                $recipe['cook_time'],
+                $recipe['serving_size'],
                 $recipe['rating'],
                 $recipe['id']
             );

@@ -7,15 +7,25 @@ class Recipe
     private $image;
     private $rating;
     private $id;
+    private $cookTime;
+    private $servingSize;
+    private $nutrition;
+    private $instructions;
+    private $ingredients;
 
-    public function __construct($title, $description, $image, $rating = 0, $id = null)
+    public function __construct($title, $description, $image, $cookTime, $servingSize, $nutrition, $instructions, $rating = 0, $id = null)
     {
         $this->title = $title;
         $this->description = $description;
         $this->image = $image;
+        $this->cookTime = $cookTime;
+        $this->servingSize = $servingSize;
+        $this->nutrition = $nutrition;
+        $this->instructions = $instructions;
         $this->rating = $rating;
         $this->id = $id;
     }
+
 
     public function getTitle()
     {
@@ -47,14 +57,54 @@ class Recipe
         $this->image = $image;
     }
 
-    public function getLike(): int
+    public function getCookTime()
     {
-        return $this->like;
+        return $this->cookTime;
     }
 
-    public function setLike(int $like): void
+    public function setCookTime($cookTime): void
     {
-        $this->like = $like;
+        $this->cookTime = $cookTime;
+    }
+
+    public function getServingSize()
+    {
+        return $this->servingSize;
+    }
+
+    public function setServingSize($servingSize)
+    {
+        $this->servingSize = $servingSize;
+    }
+
+    public function getNutrition()
+    {
+        return $this->nutrition;
+    }
+
+    public function setNutrition($nutrition): void
+    {
+        $this->nutrition = $nutrition;
+    }
+
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
+    public function setInstructions($instructions)
+    {
+        $this->instructions = $instructions;
+    }
+
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    public function setIngredients($ingredients)
+    {
+        $this->ingredients = $ingredients;
     }
 
     public function getId()
