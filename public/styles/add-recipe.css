@@ -279,6 +279,21 @@ header {
     transition: background-color 0.2s;
 }
 
+.ingredient-quantity, .ingredient-measurement {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.ingredient-measurement {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
 .instructions {
     flex: 2;
     background-color: white;

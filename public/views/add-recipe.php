@@ -91,6 +91,8 @@
                 <div id="ingredients-list">
                     <div class="ingredient-item">
                         <input type="text" name="ingredients[]" placeholder="Ingredient..." class="ingredient-input">
+                        <input type="number" name="quantities[]" placeholder="Quantity..." class="ingredient-quantity" min="0" step="any">
+                        <input type="text" name="measurements[]" placeholder="Measurement..." class="ingredient-measurement">
                     </div>
                 </div>
                 <button type="button" id="add-ingredient-btn">Add Ingredient</button>

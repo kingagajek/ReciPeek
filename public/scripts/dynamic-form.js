@@ -38,9 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function addIngredient() {
         const newIngredient = document.createElement('div');
         newIngredient.classList.add('ingredient-item');
-        newIngredient.innerHTML = '<input type="text" name="ingredients[]" placeholder="Ingredient..." class="ingredient-input">';
+        newIngredient.innerHTML = `
+        <input type="text" name="ingredients[]" placeholder="Ingredient..." class="ingredient-input">
+        <input type="number" name="quantities[]" placeholder="Quantity..." class="ingredient-quantity" min="0" step="any">
+        <input type="text" name="measurements[]" placeholder="Measurement..." class="ingredient-measurement">
+    `;
         ingredientsList.appendChild(newIngredient);
-        newIngredient.querySelector('input').focus();
+        newIngredient.querySelector('.ingredient-input').focus();
     }
 
     function addInstructionStep() {

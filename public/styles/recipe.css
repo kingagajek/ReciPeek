@@ -294,12 +294,14 @@ h1, .recipe-title {
 
 .ingredient-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
-    position: relative;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    gap: 8px;
 }
-
 
 .ingredient-item input[type="checkbox"] {
     visibility: hidden;
@@ -351,6 +353,30 @@ h1, .recipe-title {
 
 .ingredient-step {
     align-items: center;
+}
+
+.ingredient-item .ingredient-input {
+    width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.ingredient-item .ingredient-quantity, .ingredient-item .ingredient-measurement {
+    box-sizing: border-box;
+    width: calc(50% - 4px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.ingredient-item .ingredient-measurement {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }
 
 #add-ingredient-btn,
@@ -443,5 +469,8 @@ h1, .recipe-title {
 @media (max-width: 768px) {
     .recipe-content {
         flex-direction: column;
+    }
+    .ingredient-quantity, .ingredient-measurement {
+        max-width: 100px;
     }
 }

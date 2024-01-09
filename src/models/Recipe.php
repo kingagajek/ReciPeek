@@ -13,7 +13,7 @@ class Recipe
     private $instructions;
     private $ingredients;
 
-    public function __construct($title, $description, $image, $cookTime, $servingSize, $nutrition, $instructions, $rating = 0, $id = null)
+    public function __construct($title, $description, $image, $cookTime, $servingSize, $nutrition, $instructions, $ingredients, $rating = 0, $id = null)
     {
         $this->title = $title;
         $this->description = $description;
@@ -22,6 +22,7 @@ class Recipe
         $this->servingSize = $servingSize;
         $this->nutrition = $nutrition;
         $this->instructions = $instructions;
+        $this->ingredients = $ingredients;
         $this->rating = $rating;
         $this->id = $id;
     }

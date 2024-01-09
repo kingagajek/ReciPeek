@@ -78,6 +78,41 @@ s WHERE id = :id
                     $instruction,
                 ]);
             }
+
+            foreach ($recipe->getIngredients() as $ingredient) {
+                $stmt = $db->prepare('
+                    SELECT id FROM ingredients WHERE ingredient_name = :ingredient_name
+                ');
+                $stmt->execute([
+                    ':ingredient_name' => $ingredient['name']
+                ]);
+
+                $existingIngredient = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($existingIngredient) {
+                    $ingredientId = $existingIngredient['id'];
+                } else {
+                    $stmt = $db->prepare('
+                        INSERT INTO ingredients (ingredient_name) VALUES (:ingredient_name)
+                    ');
+                    $stmt->execute([
+                        ':ingredient_name' => $ingredient['name']
+                    ]);
+                    $ingredientId = $db->lastInsertId();
+                }
+
+                // Insert into recipes_ingredients
+                $stmt = $db->prepare('
+                    INSERT INTO recipes_ingredients (id_recipe, id_ingredient, quantity, measurement)
+                    VALUES (:id_recipe, :id_ingredient, :quantity, :measurement)
+                ');
+                $stmt->execute([
+                    ':id_recipe' => $recipeId,
+                    ':id_ingredient' => $ingredientId,
+                    ':quantity' => $ingredient['quantity'],
+                    ':measurement' => $ingredient['measurement']
+                ]);
+            }
+
             $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
@@ -103,6 +138,9 @@ s WHERE id = :id
                 $recipe['image'],
                 $recipe['cook_time'],
                 $recipe['serving_size'],
+                NULL,
+                NULL,
+                NULL,
                 $recipe['rating'],
                 $recipe['id']
             );

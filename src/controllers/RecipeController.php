@@ -43,8 +43,18 @@ class RecipeController extends AppController
                 "protein" => $_POST['protein'],
                 "salt" => $_POST['salt']
             ];
+            $ingredients = [];
+            foreach ($_POST['ingredients'] as $index => $ingredientName) {
+                if (!empty($ingredientName) && !empty($_POST['quantities'][$index]) && !empty($_POST['measurements'][$index])) {
+                    $ingredients[] = [
+                        'name' => $ingredientName,
+                        'quantity' => $_POST['quantities'][$index],
+                        'measurement' => $_POST['measurements'][$index]
+                    ];
+                }
+            }
             // TODO create new recipe object and save it in database
-            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name'], $_POST['cook_time'], $_POST['serving_size'], $nutrition, $_POST['instructions']);
+            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name'], $_POST['cook_time'], $_POST['serving_size'], $nutrition, $_POST['instructions'], $ingredients);
             $this->recipeRepository->addRecipe($recipe);
 
             return $this->render('recipe', [
