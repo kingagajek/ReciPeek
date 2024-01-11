@@ -14,7 +14,7 @@ class SecurityController extends AppController {
         $this->userRepository = new UserRepository();
     }
 
-    public function login() {
+        public function login() {
         if (!$this->isPost()) {
             return $this->render('login');
         }
@@ -32,12 +32,42 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (!password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/home");
+    }
+
+    public function register() {
+        if (!$this->isPost()) {
+            return $this->render('register');
+        }
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $login = $_POST['login'];
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->render('register', ['messages' => ['Invalid email address!']]);
+        }
+
+        $sanitizedLogin = htmlspecialchars($login, ENT_QUOTES, 'UTF-8');
+
+        if ($this->userRepository->getUser($email)) {
+            return $this->render('register', ['messages' => ['User with this email already exists!']]);
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $user = new User($sanitizedLogin, $email, $hashedPassword);
+
+        $this->userRepository->addUser($user);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
+        exit;
     }
 
 }

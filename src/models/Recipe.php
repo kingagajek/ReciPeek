@@ -9,17 +9,19 @@ class Recipe
     private $id;
     private $cookTime;
     private $servingSize;
+    private $difficulty;
     private $nutrition;
     private $instructions;
     private $ingredients;
 
-    public function __construct($title, $description, $image, $cookTime, $servingSize, $nutrition, $instructions, $ingredients, $rating = 0, $id = null)
+    public function __construct($title, $description, $image, $cookTime, $servingSize, $difficulty, $nutrition, $instructions, $ingredients, $rating = 0, $id = null)
     {
         $this->title = $title;
         $this->description = $description;
         $this->image = $image;
         $this->cookTime = $cookTime;
         $this->servingSize = $servingSize;
+        $this->difficulty = $difficulty;
         $this->nutrition = $nutrition;
         $this->instructions = $instructions;
         $this->ingredients = $ingredients;
@@ -78,14 +80,24 @@ class Recipe
         $this->servingSize = $servingSize;
     }
 
-    public function getNutrition()
+    public function getDifficulty()
     {
-        return $this->nutrition;
+        return $this->difficulty;
     }
 
-    public function setNutrition($nutrition): void
+    public function setDifficulty($difficulty)
+    {
+        $this->difficulty = $difficulty;
+    }
+
+    public function setNutrition(Nutrition $nutrition): void
     {
         $this->nutrition = $nutrition;
+    }
+
+    public function getNutrition(): Nutrition
+    {
+        return $this->nutrition;
     }
 
     public function getInstructions()

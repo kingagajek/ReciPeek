@@ -21,8 +21,12 @@ class RecipeController extends AppController
     }
 
     public function recipe() {
-        $recipes = $this->recipeRepository->getRecipes();
-        $this->render('recipe', ['recipes' => $recipes]);
+        if (isset($_GET['recipe_id'])) {
+            $recipe = $this->recipeRepository->getRecipe($_GET['recipe_id']);
+            $this->render('recipe', ['recipe' => $recipe]);
+        } else {
+            header('Location: /home');
+        }
     }
 
     public function addRecipe()
@@ -33,16 +37,18 @@ class RecipeController extends AppController
                 dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['image']['name']
             );
 
-            $nutrition = [
-                "calories" => $_POST['calories'],
-                "fat" => $_POST['fat'],
-                "saturated_fat" => $_POST['saturated_fat'],
-                "carbohydrates" => $_POST['carbohydrates'],
-                "sugars" => $_POST['sugars'],
-                "fiber" => $_POST['fiber'],
-                "protein" => $_POST['protein'],
-                "salt" => $_POST['salt']
-            ];
+            $difficulty = $_POST['difficulty'];
+
+                $calories = $_POST['calories'];
+                $fat = $_POST['fat'];
+                $saturated_fat = $_POST['saturated_fat'];
+                $carbohydrates = $_POST['carbohydrates'];
+                $sugars = $_POST['sugars'];
+                $fiber = $_POST['fiber'];
+                $protein = $_POST['protein'];
+                $salt = $_POST['salt'];
+            $nutrition = new Nutrition($calories, $fat, $saturated_fat, $carbohydrates, $sugars, $fiber, $protein, $salt);
+
             $ingredients = [];
             foreach ($_POST['ingredients'] as $index => $ingredientName) {
                 if (!empty($ingredientName) && !empty($_POST['quantities'][$index]) && !empty($_POST['measurements'][$index])) {
@@ -53,14 +59,10 @@ class RecipeController extends AppController
                     ];
                 }
             }
-            // TODO create new recipe object and save it in database
-            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name'], $_POST['cook_time'], $_POST['serving_size'], $nutrition, $_POST['instructions'], $ingredients);
+            $recipe = new Recipe($_POST['title'], $_POST['description'], $_FILES['image']['name'], $_POST['cook_time'], $_POST['serving_size'], $difficulty, $nutrition, $_POST['instructions'], $ingredients);
             $this->recipeRepository->addRecipe($recipe);
 
-            return $this->render('recipe', [
-                'messages' => $this->message,
-                'recipes' => $this->recipeRepository->getRecipes()
-            ]);
+            return $this->home();
         }
         return $this->render('add-recipe', ['messages' => $this->message]);
     }
@@ -85,6 +87,12 @@ class RecipeController extends AppController
         $rating = $_GET['rating'];
 
         echo json_encode($this->recipeRepository->rate($id, $rating));
+    }
+
+    public function home() {
+        $mostRecentRecipes = $this->recipeRepository->getMostRecentRecipes();
+        $recommendedRecipes = $this->recipeRepository->getRecommendedRecipes();
+        $this->render('home', ['mostRecentRecipes' => $mostRecentRecipes, 'recommendedRecipes' => $recommendedRecipes]);
     }
 
     private function validate(array $file): bool

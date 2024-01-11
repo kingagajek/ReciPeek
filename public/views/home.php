@@ -68,15 +68,16 @@
         <div class="recent-recipes">
             <h2 class="recipe-grid-title">Most recent recipes</h2>
             <div class="recipe-grid">
-                <div class="recipe-card">
-                    <img class="recipe-thumbnail" src="public\images\chicken-wrap.jpg" alt="Pumpkin soup">
+                <?php foreach ($mostRecentRecipes as $recipe): ?>
+                    <a href="/recipe?recipe_id=<?= $recipe['id'] ?>"><div class="recipe-card">
+                    <img class="recipe-thumbnail" src="public/uploads/<?= $recipe['image'] ?>" alt="<?= $recipe['title'] ?>">
                     <div class="recipe-meta">
                         <div class="recipe-title">
                             <div class="recipe-rating">
                                 <img class="star-icon" src="public\images\star.png" alt="star-icon">
                                 <span>4.5</span>
                             </div>
-                            <h3>Pumpkin soup</h3>
+                            <h3><?= $recipe['title'] ?></h3>
                         </div>
                         <div class="recipe-info">
                             <div class="time-info">
@@ -90,6 +91,8 @@
                         </div>
                     </div>
                 </div>
+                    </a>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@
             <h1> Reci<span class="text-peach">Peek</span></h1>
         </div>
         <div class="form-container">
-            <form action="" class="login-form">
+            <form method="post" action="" class="login-form">
                 <div class="form-inputs">
                     <input type="text" placeholder="Login" name="login" required>
                     <input type="text" placeholder="E-mail" name="email" required>

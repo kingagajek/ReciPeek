@@ -2,33 +2,34 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Recipe.php';
+require_once __DIR__ . '/../models/Nutrition.php';
 class RecipeRepository extends Repository
 {
-    public function getRecipe(int $id): ?Recipe
-    {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.recipe
-s WHERE id = :id
-        ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($recipe == false) {
-            return null;
-        }
-
-        return new Recipe (
-            $recipe['title'],
-            $recipe['description'],
-            $recipe['image'],
-            $recipe['cook_time'],
-            $recipe['serving_size'],
-            $recipe['rating'],
-            $recipe['id']
-        );
-    }
+//    public function getRecipe(int $id): ?Recipe
+//    {
+//        $stmt = $this->database->connect()->prepare('
+//            SELECT * FROM public.recipe
+//s WHERE id = :id
+//        ');
+//        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+//        $stmt->execute();
+//
+//        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
+//
+//        if ($recipe == false) {
+//            return null;
+//        }
+//
+//        return new Recipe (
+//            $recipe['title'],
+//            $recipe['description'],
+//            $recipe['image'],
+//            $recipe['cook_time'],
+//            $recipe['serving_size'],
+//            $recipe['rating'],
+//            $recipe['id']
+//        );
+//    }
 
     public function addRecipe(Recipe $recipe): void
     {
@@ -41,31 +42,49 @@ s WHERE id = :id
                 INSERT INTO "recipes" (title, description, image, cook_time, serving_size, created_at)
                 VALUES (?, ?, ?, ?, ?, ?)
             ');
+
+            $difficultyStmt = $db->prepare('
+                SELECT id FROM difficulty WHERE level = :level
+            ');
+            $difficultyStmt->execute([
+                ':level' => $recipe->getDifficulty()
+            ]);
+            $difficultyId = $difficultyStmt->fetch(PDO::FETCH_ASSOC)['id'];
+
+// Now, include the difficulty id in your INSERT statement for recipes
+            $stmt = $db->prepare('
+                INSERT INTO "recipes" (title, description, image, cook_time, serving_size, id_difficulty, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ');
+
             $stmt->execute([
                 $recipe->getTitle(),
                 $recipe->getDescription(),
                 $recipe->getImage(),
                 $recipe->getCookTime(),
                 $recipe->getServingSize(),
+                $difficultyId,
                 $date->format('Y-m-d'),
             ]);
             $recipeId = $db->lastInsertId();
 
+            $nutrition = $recipe->getNutrition();
+
             $stmt = $db->prepare('
-                INSERT INTO "nutrition" (id_recipe, calories, fat, saturated_fat, carbohydrates, sugars, fiber, protein, salt)
+                INSERT INTO nutrition (id_recipe, calories, fat, saturated_fat, carbohydrates, sugars, fiber, protein, salt)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ');
-            $nutrition = $recipe->getNutrition();
+
             $stmt->execute([
                 $recipeId,
-                $nutrition['calories'],
-                $nutrition['fat'],
-                $nutrition['saturated_fat'],
-                $nutrition['carbohydrates'],
-                $nutrition['sugars'],
-                $nutrition['fiber'],
-                $nutrition['protein'],
-                $nutrition['salt'],
+                $nutrition->getCalories(),
+                $nutrition->getFat(),
+                $nutrition->getSaturatedFat(),
+                $nutrition->getCarbohydrates(),
+                $nutrition->getSugars(),
+                $nutrition->getFiber(),
+                $nutrition->getProtein(),
+                $nutrition->getSalt(),
             ]);
 
             foreach ($recipe->getInstructions() as $instruction) {
@@ -121,32 +140,75 @@ s WHERE id = :id
     }
 
 
-    public function getRecipes(): array
+    public function getRecipe(int $id): ?Recipe
     {
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM recipes ORDER BY id;
+            SELECT * FROM recipes WHERE id = :id;
         ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        foreach ($recipes as $recipe) {
-            $result[] = new Recipe(
+
+            // Fetch nutrition
+        $stmt = $this->database->connect()->prepare('
+            SELECT r.*, n.calories, n.fat, n.saturated_fat, n.carbohydrates, n.sugars, n.fiber, n.protein, n.salt
+            FROM recipes r
+            LEFT JOIN nutrition n ON r.id = n.id_recipe
+            WHERE r.id = :id
+        ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $recipeData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$recipeData) {
+            return null;
+        }
+
+        $nutrition = new Nutrition(
+            $recipeData['calories'],
+            $recipeData['fat'],
+            $recipeData['saturated_fat'],
+            $recipeData['carbohydrates'],
+            $recipeData['sugars'],
+            $recipeData['fiber'],
+            $recipeData['protein'],
+            $recipeData['salt']
+        );
+
+            $instructionsStmt = $this->database->connect()->prepare('
+            SELECT step FROM instructions WHERE id_recipe = :id_recipe
+        ');
+            $instructionsStmt->bindParam(':id_recipe', $recipe['id'], PDO::PARAM_INT);
+            $instructionsStmt->execute();
+            $instructions = $instructionsStmt->fetchAll(PDO::FETCH_COLUMN, 0);
+
+            $ingredientsStmt = $this->database->connect()->prepare('
+            SELECT i.ingredient_name, ri.quantity, ri.measurement 
+            FROM recipes_ingredients ri
+            JOIN ingredients i ON ri.id_ingredient = i.id
+            WHERE ri.id_recipe = :id_recipe
+        ');
+            $ingredientsStmt->bindParam(':id_recipe', $recipe['id'], PDO::PARAM_INT);
+            $ingredientsStmt->execute();
+            $ingredients = $ingredientsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return new Recipe(
                 $recipe['title'],
                 $recipe['description'],
                 $recipe['image'],
                 $recipe['cook_time'],
                 $recipe['serving_size'],
                 NULL,
-                NULL,
-                NULL,
+                $nutrition,
+                $instructions,
+                $ingredients, //przekazywac tablice ingredients
                 $recipe['rating'],
                 $recipe['id']
             );
-        }
-
-        return $result;
     }
 
     public function getRecipeByTitle(string $searchString)
@@ -191,4 +253,24 @@ s WHERE id = :id
 
         return $new_ratings;
     }
+
+    public function getMostRecentRecipes($limit = 10): array {
+        $stmt = $this->database->connect()->prepare('
+        SELECT * FROM recipes ORDER BY created_at DESC LIMIT :limit;
+    ');
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getRecommendedRecipes($limit = 5): array {
+        // This example assumes you have a 'views' column to track the number of views
+        $stmt = $this->database->connect()->prepare('
+        SELECT * FROM recipes ORDER BY views DESC LIMIT :limit;
+    ');
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

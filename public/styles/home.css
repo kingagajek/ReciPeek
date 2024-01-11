@@ -111,10 +111,25 @@ header {
     width: 100%;
 }
 
+.recipe-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .recipe-card {
     background: var(--color-peach);
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
+}
+
+.recent-recipes .recipe-card {
+    background-color: white;
+    color: var(--color-black-light);
+}
+
+.recent-recipes .recipe-info-icon {
+    filter: unset;
 }
 
 .recipe-thumbnail {
@@ -160,4 +175,56 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.slick-prev,
+.slick-next {
+    font-size: 0; /* Ensures that the default text is not visible */
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    cursor: pointer;
+    background-color: #333; /* Dark background for visibility */
+    border-radius: 50%; /* Circular background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8; /* Semi-transparency */
+    z-index: 25; /* Make sure it's above other elements */
+    border: none; /* Remove default borders */
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    opacity: 1; /* Full visibility on hover */
+}
+
+.slick-prev {
+    left: 25px; /* Adjust as per your layout */
+}
+
+.slick-next {
+    right: 25px; /* Adjust as per your layout */
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-family: 'slick'; /* Use slick's font family */
+    font-size: 20px; /* Adjust arrow size */
+    line-height: 1;
+    color: white;
+    opacity: .75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: '←'; /* Default arrow text, you can use an arrow character here */
+}
+
+.slick-next:before {
+    content: '→'; /* Default arrow text, you can use an arrow character here */
 }
