@@ -12,8 +12,4 @@ class DefaultController extends AppController {
         $this->render('result');
     }
 
-    public function editProfile() {
-        $this->render('edit-profile');
-    }
-
 }

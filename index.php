@@ -12,11 +12,12 @@ Routing::get('welcome', 'DefaultController');
 Routing::get('result', 'DefaultController');
 Routing::get('recipe', 'RecipeController');
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('register', 'SecurityController');
 Routing::post('addRecipe', 'RecipeController');
 Routing::post('search', 'RecipeController');
 Routing::get('rate', 'RecipeController');
-Routing::get('editProfile', 'DefaultController');
+Routing::get('editProfile', 'SecurityController');
 Routing::get('admin', 'AdminController');
 
 Routing::run($path);

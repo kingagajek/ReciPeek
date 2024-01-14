@@ -14,7 +14,7 @@ class SecurityController extends AppController {
         $this->userRepository = new UserRepository();
     }
 
-        public function login() {
+    public function login() {
         if (!$this->isPost()) {
             return $this->render('login');
         }
@@ -36,8 +36,24 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        session_start();
+        $_SESSION['user_email'] = $email;
+        $_SESSION['timeout'] = time() + 60;
+
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/home");
+        header("Location: {$url}/editProfile");
+    }
+
+    public function logout() {
+        session_start();
+
+        unset($_SESSION['user_email']);
+        unset($_SESSION['timeout']);
+
+        session_destroy();
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 
     public function register() {
@@ -70,4 +86,17 @@ class SecurityController extends AppController {
         exit;
     }
 
+    public function editProfile() {
+        session_start();
+
+        if (isset($_SESSION['user_email']) && isset($_SESSION['timeout']) && $_SESSION['timeout'] > time()) {
+            return $this->render('edit-profile');
+        } else if (isset($_SESSION['timeout']) && $_SESSION['timeout'] <= time()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/logout");
+        } else {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+        }
+    }
 }

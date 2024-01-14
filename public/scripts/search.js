@@ -48,6 +48,8 @@ function createRecipe(recipe) {
     const a = clone.querySelector("a");
     a.setAttribute('data-time', recipe.cook_time);
     a.setAttribute('data-difficulty', recipe.id_difficulty);
+    a.setAttribute('data-rating', recipe.calculatedRating ?? 0);
+    a.setAttribute('data-ratingCount', recipe.ratingCount ?? 0);
     if (a && recipe && recipe.id !== undefined) {
         a.href = `/recipe?recipe_id=${recipe.id}`;
     } else {
@@ -64,7 +66,11 @@ function createRecipe(recipe) {
     const difficulty = clone.querySelector(".difficulty-info span");
     difficulty.innerHTML = recipe.level; //bedzie trzeba zgetowac difficulty
     const rating = clone.querySelector(".recipe-rating span");
-    rating.innerHTML = recipe.rating;
+    if (recipe.calculatedRating && recipe.ratingCount) {
+        rating.innerHTML = `${recipe.calculatedRating} (${recipe.ratingCount} reviews)`;
+    } else {
+        rating.innerHTML = '0 (0 reviews)';
+    }
 
     recipeContainer.appendChild(clone);
 }

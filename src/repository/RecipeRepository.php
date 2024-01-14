@@ -217,7 +217,30 @@ class RecipeRepository extends Repository
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as &$result) {
+            if (empty($result['rating'])) continue;
+
+            $recipe = new Recipe(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                $result['rating'],
+            );
+
+            $recipeCalculatedRating = $recipe->getCalculatedRating();
+            $result['calculatedRating'] = $recipeCalculatedRating['rating'];
+            $result['ratingCount'] = $recipeCalculatedRating['rating_count'];
+        }
+
+        return $results;
     }
 
     public function getDifficultyNameById(int $id)
