@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\recipe.css">
+    <link rel="stylesheet" href="public\styles\header.css">
     <script type="text/javascript" src="./public/scripts/redirect.js" defer></script>
     <script type="text/javascript" src="./public/scripts/dynamic-form.js" defer></script>
     <meta charset="UTF-8">

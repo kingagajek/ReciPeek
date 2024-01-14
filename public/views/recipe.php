@@ -3,11 +3,12 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\recipe.css">
+    <link rel="stylesheet" href="public\styles\header.css">
     <script type="text/javascript" src="./public/scripts/statistics.js" defer></script>
     <script type="text/javascript" src="./public/scripts/redirect.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReciPeek result</title>
+    <title>ReciPeek Recipe</title>
 </head>
 <body>
     <header>
@@ -15,6 +16,12 @@
         <div class="search-container">
             <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
+            <div class="dropdown-container">
+                <select id="search-type" name="search-type">
+                    <option value="by_recipe">By recipe</option>
+                    <option value="by_ingredients">By ingredients</option>
+                </select>
+            </div>
         </div>
         <div class="header-buttons">
             <img class="profile" src="public\images\profile.svg" alt="profile">

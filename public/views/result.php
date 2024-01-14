@@ -3,8 +3,8 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\result.css">
+    <link rel="stylesheet" href="public\styles\header.css">
     <script type="text/javascript" src="./public/scripts/search.js" defer></script>
-    <script type="text/javascript" src="./public/scripts/sorting.js" defer></script>
     <script
             src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReciPeek result</title>
+    <title>ReciPeek Result</title>
 </head>
 <body>
     <header>
@@ -20,6 +20,12 @@
         <div class="search-container">
             <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
+            <div class="dropdown-container">
+                <select id="search-type" name="search-type">
+                    <option value="by_recipe">By recipe</option>
+                    <option value="by_ingredients">By ingredients</option>
+                </select>
+            </div>
         </div>
         <div class="header-buttons">
             <img class="profile" src="public\images\profile.svg" alt="profile">
@@ -34,14 +40,14 @@
     <div class="main-container">
         <div class="option-buttons">
             <select class="sort-button" name="sort" id="sort">
-                <option value="rating-ASC" data-sort-type="rating" data-sort-direction="ASC">Rating: highest to lowest</option>
-                <option value="rating-DESC" data-sort-type="rating" data-sort-direction="DESC">Rating: lowest to highest</option>
-                <option value="time-ASC">Preparation time: highest to lowest</option>
-                <option value="time-DESC">Preparation time: lowest to highest</option>
-                <option value="ingredients-ASC">Total ingredients: lowest to highest</option>
-                <option value="ingredients-DESC">Total ingredients: lowest to highest</option>
+                <option value="rating-DESC">Rating: highest to lowest</option>
+                <option value="rating-ASC">Rating: lowest to highest</option>
+                <option value="time-DESC">Preparation time: highest to lowest</option>
+                <option value="time-ASC">Preparation time: lowest to highest</option>
+                <option value="ingredients-DESC" style="display: none">Total ingredients: highest to lowest</option>
+                <option value="ingredients-ASC" style="display: none">Total ingredients: lowest to highest</option>
+                <option value="difficulty-DESC">Difficulty: highest to lowest</option>
                 <option value="difficulty-ASC">Difficulty: lowest to highest</option>
-                <option value="difficulty-DESC">Difficulty: lowest to highest</option>
             </select>
 
             <button class="filter-button" id=filter-button>Filters</button>

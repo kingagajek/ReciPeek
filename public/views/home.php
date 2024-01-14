@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\home.css">
+    <link rel="stylesheet" href="public\styles\header.css">
     <script type="text/javascript" src="./public/scripts/redirect.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

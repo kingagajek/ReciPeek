@@ -80,5 +80,38 @@ const filterCheckboxes = () => {
         });
     });
 }
-
 $(document).ready(filterCheckboxes);
+
+const resultSorting = () => {
+    const sortingSelect = document.querySelector('#sort');
+    const allResultsContainer = document.querySelector('.recipe-grid');
+
+    if (!sortingSelect) return;
+
+    sortingSelect.addEventListener('change', function() {
+        const allResults = Array.from(document.querySelectorAll('.recipe-grid .recipe-card-link'));
+
+        if (!allResults || allResults.length < 1) return;
+
+        const sorting = this.value.split('-');
+        const sortingType = sorting[0];
+        const sortingValue = sorting[1];
+
+        const sortedResults = allResults.sort((a, b) => {
+            const firstElAttr = parseFloat(a.getAttribute(`data-${sortingType}`));
+            const secondElAttr = parseFloat(b.getAttribute(`data-${sortingType}`));
+
+            return sortingValue === 'ASC'
+                ? firstElAttr - secondElAttr
+                : secondElAttr - firstElAttr;
+        });
+
+        allResultsContainer.innerHTML = '';
+
+        sortedResults.forEach(sortedResult => {
+            allResultsContainer.append(sortedResult);
+        });
+    });
+}
+
+$(document).ready(resultSorting);
