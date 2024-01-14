@@ -3,8 +3,8 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\recipe.css">
-    <script type="text/javascript" src="./public/scripts/search.js" defer></script>
     <script type="text/javascript" src="./public/scripts/statistics.js" defer></script>
+    <script type="text/javascript" src="./public/scripts/redirect.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReciPeek result</title>
@@ -28,28 +28,11 @@
 
     <div class="main-container">
         <div class="main-info">
+            <?php $rating = $recipe->getCalculatedRating(); ?>
             <img class="recipe-picture" src="public/uploads/<?= $recipe->getImage() ?>" alt="Chicken wrap">
             <div class="main-info-text">
                 <h1><?= $recipe->getTitle() ?></h1>
                 <div class="recipe-rating" data-recipe-id="<?= $recipe->getId();?>">
-                        <?php
-                        $recipe_rating_array = $recipe->getRating();
-                        $recipe_rating_sum = 0;
-                        $recipe_rating_count = 0;
-
-                        if ($recipe_rating_array) {
-                            $recipe_rating_array = unserialize($recipe_rating_array);
-
-                            foreach ($recipe_rating_array as $rating => $rating_count) {
-                                $recipe_rating_sum += $rating * $rating_count;
-                                $recipe_rating_count += $rating_count;
-                            }
-
-                            $recipe_rating = $recipe_rating_sum / $recipe_rating_count;
-                        } else {
-                            $recipe_rating = 0;
-                        }
-                    ?>
                     <div class="recipe-rating-stars">
                         <div class="recipe-rating-stars-empty">
                             <img class="star-icon rate-button" src="public\images\star.png" alt="star-icon" data-rating="1">
@@ -58,7 +41,7 @@
                             <img class="star-icon rate-button" src="public\images\star.png" alt="star-icon" data-rating="4">
                             <img class="star-icon rate-button" src="public\images\star.png" alt="star-icon" data-rating="5">
                         </div>
-                        <div class="recipe-rating-stars-full" style="width: <?= $recipe_rating / 5 * 100; ?>%">
+                        <div class="recipe-rating-stars-full" style="width: <?= $rating["rating"] / 5 * 100; ?>%">
                             <img class="star-icon" src="public\images\star.png" alt="star-icon">
                             <img class="star-icon" src="public\images\star.png" alt="star-icon">
                             <img class="star-icon" src="public\images\star.png" alt="star-icon">
@@ -67,21 +50,23 @@
                         </div>
                     </div>
                     <span class="recipe-rating-summary">
-                        <?= round($recipe_rating, 2).' ('.$recipe_rating_count.' ratings)'; ?>
+                        <?php
+                            echo $rating["rating"]." (".$rating["rating_count"]." reviews)";
+                        ?>
                     </span>
                 </div>
                 <div class="recipe-info">
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\time.svg" alt="time-icon">
-                        <span> 30 mins</span>
+                        <span> <?= $recipe->getCookTime() ?> mins</span>
                     </div>
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
-                        <span>easy</span>
+                        <span><?= $recipe->getDifficulty(); ?></span>
                     </div>
                     <div class="recipe-info-item">
                         <img class="recipe-info-icon" src="public\images\portion.svg" alt="portion-icon">
-                        <span>2 portion</span>
+                        <span><?= $recipe->getServingSize() ?> portion</span>
                     </div>
                 </div>
                 <p class="recipe-description">
@@ -93,7 +78,6 @@
                         <div class="nutrition-item">
                             <span class="nutrition-label">kcal</span>
                             <span class="nutrition-value"><?= $recipe->getNutrition()->getCalories() ?></span>
-<!--                            $recipe->getNutrition()->getCalories() masz stowrzyc modele Nutrition itd -->
                         </div>
                         <div class="nutrition-item">
                             <span class="nutrition-label">fat</span>

@@ -61,29 +61,83 @@ header {
     border-radius: 1.5px;
 }
 
+.main-container .option-buttons {
+    display: flex;
+    gap: 24px;
+}
+
 .sort-button {
     background-color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 14px;
     text-decoration: none;
-    padding: 8px;
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.5px;
+    padding: 16px 32px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
-.filter-button {
+.filter-button, .filter-menu .filter-select button{
     background-color: var(--color-grey-dark);
     border: none;
-    border-radius: 8px;
+    border-radius: 14px;
     text-decoration: none;
-    padding: 8px;
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.5px;
+    padding: 16px 32px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
     box-sizing: border-box;
     color: white;
+    cursor: pointer;
+}
+
+.filter-menu {
+    display: none;
+}
+
+.filter-menu.active {
+    display: flex;
+    gap: 24px;
+}
+
+.filter-menu .filter-select {
+    position: relative;
+    width: 170px;
+}
+
+.filter-menu .filter-select button {
+    width: 100%;
+    background-color: white;
+    color: black;
+}
+
+.filter-menu .filter-select.active button {
+    border-radius: 8px 8px 0 0;
+}
+
+.filter-menu .filter-select .filter-options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+}
+
+.filter-menu .filter-select:not(.active) .filter-options{
+    display: none;
+}
+
+.filter-menu .filter-select .filter-options .filter-option {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: black;
+    justify-content: space-between;
 }
 
 .ingredients-button {
@@ -114,6 +168,19 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
+    align-items: stretch;
+}
+
+.recipe-card-link {
+    width: calc((100% - 96px) / 4);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: auto;
+}
+
+.recipe-card-link.hidden {
+    display: none;
 }
 
 .recipe-card {
@@ -121,12 +188,16 @@ header {
     flex-direction: column;
     background: white;
     border-radius: 8px;
-    width: calc((100% - 96px) / 4);
+    height: 100%;
 }
 
 .recipe-picture {
-    border-radius:  8px 8px 0 0;
-    width: 100%
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
 }
 
 

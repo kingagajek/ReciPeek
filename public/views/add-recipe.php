@@ -3,14 +3,15 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\recipe.css">
+    <script type="text/javascript" src="./public/scripts/redirect.js" defer></script>
     <script type="text/javascript" src="./public/scripts/dynamic-form.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReciPeek result</title>
+    <title>ReciPeek Add Recipe</title>
 </head>
 <body>
     <header>
-        <img class="logo" src="public\images\logo.svg" alt="logo">
+        <a href="/home"><img class="logo" src="public\images\logo.svg" alt="logo"></a>
         <div class="search-container">
             <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
@@ -56,9 +57,9 @@
                         <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
                         <select type="text" name="difficulty" placeholder="Difficulty..." required>
                             <option value="">Select difficulty...</option>
-                            <option value="easy">Easy</option>
-                            <option value="more_effort">More effort</option>
-                            <option value="challenge">A challenge</option>
+                            <option value="1">Easy</option>
+                            <option value="2">More effort</option>
+                            <option value="3">A challenge</option>
                         </select>
                     </div>
                     <div class="recipe-info-item">

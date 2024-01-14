@@ -93,9 +93,9 @@ header {
     align-items : center;
     text-align: center;
     flex-direction: column;
-    padding: 32px 0;
+    padding: 28px 0;
     color: white;
-    gap: 32px;
+    gap: 24px;
 }
 
 .recommended-recipes, .recent-recipes {
@@ -109,6 +109,34 @@ header {
 
 .recipe-grid {
     width: 100%;
+    padding: 0 80px;
+}
+
+.recipe-grid:not(.slick-initialized) {
+    overflow: hidden;
+    display: flex;
+}
+
+.recipe-grid:not(.slick-initialized) .recipe-card-link {
+    width: 20%;
+    display: inline-block;
+}
+
+.recipe-grid:not(.slick-initialized) .recipe-card-link:nth-child(n + 6) {
+    display:none;
+}
+
+.recipe-grid .slick-track {
+    display: flex;
+    align-items: stretch;
+}
+
+.recipe-grid .slick-track .recipe-card-link {
+    height: auto;
+}
+
+.recipe-grid .slick-track .recipe-card-link .recipe-card {
+    height: 100%;
 }
 
 .recipe-card-link {
@@ -121,6 +149,7 @@ header {
     background: var(--color-peach);
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
+    margin: 0 10px;
 }
 
 .recent-recipes .recipe-card {
@@ -136,6 +165,7 @@ header {
     width: 100%;
     aspect-ratio: 1.1/1;
     height: auto;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -147,13 +177,24 @@ header {
 .recipe-title {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+    padding: 6px 0 8px 0;
+}
+
+.recipe-title h3 {
+    text-align: left;
+    font-size: 1em;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 .recipe-rating {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
 .star-icon {
@@ -174,7 +215,7 @@ header {
 .time-info, .difficulty-info {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
 .slick-prev,

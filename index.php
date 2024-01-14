@@ -16,5 +16,7 @@ Routing::post('register', 'SecurityController');
 Routing::post('addRecipe', 'RecipeController');
 Routing::post('search', 'RecipeController');
 Routing::get('rate', 'RecipeController');
+Routing::get('editProfile', 'DefaultController');
+Routing::get('admin', 'AdminController');
 
 Routing::run($path);

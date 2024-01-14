@@ -134,4 +134,25 @@ class Recipe
     {
         return $this->rating;
     }
+
+    public function getCalculatedRating()
+    {
+        $recipe_rating_array = $this->rating;
+        $recipe_rating_sum = 0;
+        $recipe_rating_count = 0;
+
+        if ($recipe_rating_array) {
+            $recipe_rating_array = unserialize($recipe_rating_array);
+
+            foreach ($recipe_rating_array as $rating => $rating_count) {
+                $recipe_rating_sum += $rating * $rating_count;
+                $recipe_rating_count += $rating_count;
+            }
+
+            $recipe_rating = round($recipe_rating_sum / $recipe_rating_count, 2);
+        } else {
+            $recipe_rating = 0;
+        }
+        return ["rating" => $recipe_rating, "rating_count" => $recipe_rating_count];
+    }
 }

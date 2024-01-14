@@ -22,6 +22,8 @@ ENV PHP_EXTENSIONS \
     pgsql \
     pdo_pgsql
 
+ENV UPLOAD_LIMIT 64M
+
 RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS \

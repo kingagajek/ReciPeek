@@ -1,50 +1,70 @@
-const search = document.querySelector('input[placeholder="Search recipe"]');
-const recipeContainer = document.querySelector(".main-container");
+const searchInput = document.querySelector('input[placeholder="Search recipe"]');
+const recipeContainer = document.querySelector("div.recipe-grid");
 
-search.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
+(async () => {
+    const url = new URLSearchParams(window.location.search);
+    searchInput.value = url.get("name");
+    await searchFn();
+})();
 
-        const data = {search: this.value};
-
-        fetch("/search", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (recipes) {
-            recipeContainer.innerHTML = "";
-            loadProjects(recipes)
-        });
-    }
+searchInput.addEventListener("keyup", function(event) {
+    searchFn(event);
 });
 
-function loadProjects(recipes) {
+async function searchFn(event = {}) {
+    if (event.key === "Enter" || Object.keys(event).length === 0) {
+        if (event.preventDefault) event.preventDefault();
+
+        const data = { search: searchInput.value };
+
+        try {
+            const response = await fetch("/search", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const recipes = await response.json();
+            recipeContainer.innerHTML = "";
+            loadRecipes(recipes);
+        } catch (error) {
+            console.error('Error during fetch:', error);
+        }
+    }
+}
+
+function loadRecipes(recipes) {
     recipes.forEach(recipe => {
-        console.log(recipe);
         createRecipe(recipe);
     });
 }
 
 function createRecipe(recipe) {
-    const template = document.querySelector("#recipe-template");
+    const template = document.querySelector("#result-template");
 
     const clone = template.content.cloneNode(true);
-    const div = clone.querySelector("div");
-    div.id = recipe.id;
-    const image = clone.querySelector("img");
-    image.src = `/public/uploads/${recipe.image}`;
-    const title = clone.querySelector("h2");
-    title.innerHTML = recipe.title;
+    const a = clone.querySelector("a");
+    a.setAttribute('data-time', recipe.cook_time);
+    a.setAttribute('data-difficulty', recipe.id_difficulty);
+    if (a && recipe && recipe.id !== undefined) {
+        a.href = `/recipe?recipe_id=${recipe.id}`;
+    } else {
+        console.error('Anchor tag or recipe ID not found.');
+    }
+    const img = clone.querySelector("img");
+    img.src = `/public/uploads/${recipe.image}`;
+    const h3 = clone.querySelector("h3");
+    h3.innerHTML = recipe.title;
     const description = clone.querySelector("p");
     description.innerHTML = recipe.description;
-    const like = clone.querySelector(".fa-heart");
-    like.innerText = recipe.like;
-    const dislike = clone.querySelector(".fa-minus-square");
-    dislike.innerText = recipe.dislike;
+    const time = clone.querySelector(".time-info span");
+    time.innerHTML = recipe.cook_time + " mins";
+    const difficulty = clone.querySelector(".difficulty-info span");
+    difficulty.innerHTML = recipe.level; //bedzie trzeba zgetowac difficulty
+    const rating = clone.querySelector(".recipe-rating span");
+    rating.innerHTML = recipe.rating;
 
     recipeContainer.appendChild(clone);
 }

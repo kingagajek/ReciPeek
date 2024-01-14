@@ -39,20 +39,6 @@ class RecipeRepository extends Repository
 
         try {
             $stmt = $db->prepare('
-                INSERT INTO "recipes" (title, description, image, cook_time, serving_size, created_at)
-                VALUES (?, ?, ?, ?, ?, ?)
-            ');
-
-            $difficultyStmt = $db->prepare('
-                SELECT id FROM difficulty WHERE level = :level
-            ');
-            $difficultyStmt->execute([
-                ':level' => $recipe->getDifficulty()
-            ]);
-            $difficultyId = $difficultyStmt->fetch(PDO::FETCH_ASSOC)['id'];
-
-// Now, include the difficulty id in your INSERT statement for recipes
-            $stmt = $db->prepare('
                 INSERT INTO "recipes" (title, description, image, cook_time, serving_size, id_difficulty, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ');
@@ -63,7 +49,7 @@ class RecipeRepository extends Repository
                 $recipe->getImage(),
                 $recipe->getCookTime(),
                 $recipe->getServingSize(),
-                $difficultyId,
+                $recipe->getDifficulty(),
                 $date->format('Y-m-d'),
             ]);
             $recipeId = $db->lastInsertId();
@@ -196,13 +182,20 @@ class RecipeRepository extends Repository
             $ingredientsStmt->execute();
             $ingredients = $ingredientsStmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $difficultyStmt = $this->database->connect()->prepare('
+                SELECT level FROM difficulty WHERE id = :id_difficulty
+            ');
+            $difficultyStmt->bindParam(':id_difficulty', $recipe['id_difficulty'], PDO::PARAM_INT);
+            $difficultyStmt->execute();
+            $difficulty = $difficultyStmt->fetch(PDO::FETCH_ASSOC);
+
             return new Recipe(
                 $recipe['title'],
                 $recipe['description'],
                 $recipe['image'],
                 $recipe['cook_time'],
                 $recipe['serving_size'],
-                NULL,
+                $difficulty['level'],
                 $nutrition,
                 $instructions,
                 $ingredients, //przekazywac tablice ingredients
@@ -216,12 +209,26 @@ class RecipeRepository extends Repository
         $searchString = '%' . strtolower($searchString) . '%';
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM recipes WHERE LOWER(title) LIKE :search OR LOWER(description) LIKE :search
-        ');
+        SELECT recipes.*, difficulty.level 
+        FROM recipes 
+        JOIN difficulty ON recipes.id_difficulty = difficulty.id 
+        WHERE LOWER(recipes.title) LIKE :search OR LOWER(recipes.description) LIKE :search
+    ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDifficultyNameById(int $id)
+    {
+        $difficultyStmt = $this->database->connect()->prepare('
+            SELECT level FROM difficulty WHERE id = :id 
+        ');
+        $difficultyStmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $difficultyStmt->execute();
+
+        return $difficultyStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function rate(int $id, int $rating) {
@@ -263,7 +270,7 @@ class RecipeRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRecommendedRecipes($limit = 5): array {
+    public function getRecommendedRecipes($limit = 10): array {
         // This example assumes you have a 'views' column to track the number of views
         $stmt = $this->database->connect()->prepare('
         SELECT * FROM recipes ORDER BY views DESC LIMIT :limit;

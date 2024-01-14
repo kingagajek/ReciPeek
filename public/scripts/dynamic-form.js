@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fileUpload.addEventListener('change', function(event) {
         const [file] = event.target.files;
         if (file) {
-            // const imageContainer = document.createElement('div');
-            // imageContainer.classList.add('image-preview-container');
-
             const imageTag = document.createElement('img');
             imageTag.classList.add('image-preview');
             imageTag.src = URL.createObjectURL(file);
@@ -23,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             imageUploadContainer.innerHTML = '';
             imageUploadContainer.appendChild(imageTag);
             imageUploadContainer.appendChild(changeButton);
-            // imageUploadContainer.appendChild(imageContainer);
             imageUploadLabel.style.display = 'none';
         }
     });

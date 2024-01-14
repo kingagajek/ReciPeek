@@ -262,7 +262,7 @@ h1, .recipe-title {
     gap: 10px;
     text-align: center;
     justify-content: space-between;
-    min-width: 70px;
+    min-width: 100px;
     width: calc((65% - 70px) / 8);
     background-color: #e0e0e0;
     padding: 5px 10px;
@@ -294,13 +294,12 @@ h1, .recipe-title {
 
 .ingredient-item {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
     gap: 8px;
+    position: relative;
 }
 
 .ingredient-item input[type="checkbox"] {
@@ -315,8 +314,7 @@ h1, .recipe-title {
     content: '';
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
     width: 18px;
     height: 18px;
     background: white;
@@ -337,8 +335,8 @@ h1, .recipe-title {
     content: '✓';
     position: absolute;
     left: 6px;
-    top: 50%;
-    transform: translateY(-64%) rotate(15deg);
+    top: 0;
+    transform: translateY(-24%) rotate(15deg);
     color: var(--color-peach);
     font-size: 24px;
     font-weight: 600;
