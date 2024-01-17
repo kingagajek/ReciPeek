@@ -29,6 +29,8 @@ body {
     max-width: 350px;
     object-fit: cover;
     border-radius: 10px;
+    max-height: 350px;
+    object-position: center;
 }
 
 .image-preview-container {

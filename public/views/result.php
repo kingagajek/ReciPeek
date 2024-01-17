@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="header-buttons">
-            <img class="profile" src="public\images\profile.svg" alt="profile">
+            <a href="/editProfile"><img class="profile" src="public\images\profile.svg" alt="profile"></a>
             <div class="hamburger">
                 <span></span>
                 <span></span>

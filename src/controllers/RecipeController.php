@@ -22,7 +22,11 @@ class RecipeController extends AppController
 
     public function recipe() {
         if (isset($_GET['recipe_id'])) {
-            $recipe = $this->recipeRepository->getRecipe($_GET['recipe_id']);
+            $recipeId = $_GET['recipe_id'];
+
+            $this->recipeRepository->incrementRecipeViews($recipeId);
+
+            $recipe = $this->recipeRepository->getRecipe($recipeId);
             $this->render('recipe', ['recipe' => $recipe]);
         } else {
             header('Location: /home');
@@ -83,10 +87,16 @@ class RecipeController extends AppController
     }
 
     public function rate() {
-        $id = $_GET['id'];
-        $rating = $_GET['rating'];
+        session_start();
 
-        echo json_encode($this->recipeRepository->rate($id, $rating));
+        if (isset($_SESSION['user_email'])) {
+            $id = $_GET['id'];
+            $rating = $_GET['rating'];
+
+            echo json_encode($this->recipeRepository->rate($id, $rating, $_SESSION['user_email']));
+        } else {
+            echo json_encode(['error_message' => 'You must be logged in to rate the recipe.']);
+        }
     }
 
     public function home() {

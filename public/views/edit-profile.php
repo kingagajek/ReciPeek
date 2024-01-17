@@ -6,6 +6,8 @@
     <title>Edit Profile</title>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\edit-profile.css">
+    <link rel="stylesheet" href="public\styles\header.css">
+    <script type="text/javascript" src="./public/scripts/validation.js" defer></script>
 </head>
 <body>
 
@@ -27,36 +29,43 @@
 
 <main>
     <section class="profile-edit-section">
-        <h1>Profile</h1>
-        <form action="path_to_profile_update_script.php" method="post" enctype="multipart/form-data">
-            <div class="profile-photo-container">
-                <img src="public/uploads/profile_photo.jpg" alt="Profile Photo" class="profile-photo">
-                <button type="button" onclick="document.getElementById('profile-photo-upload').click()">Change photo</button>
-                <input type="file" id="profile-photo-upload" name="profile_photo" hidden>
-                <button type="submit" name="delete_photo">Delete</button>
+        <?php if (isset($messages)): ?>
+            <div class="edit-profile-message">
+                <?= $messages ?>
             </div>
-
+        <?php endif; ?>
+        <h1>Profile</h1>
+        <form method="post" enctype="multipart/form-data">
+<!--            <div class="profile-photo-container">-->
+<!--                <img src="public/uploads/profile_photo.jpg" alt="Profile Photo" class="profile-photo">-->
+<!--                <button type="button" onclick="document.getElementById('profile-photo-upload').click()">Change photo</button>-->
+<!--                <input type="file" id="profile-photo-upload" name="profile_photo" hidden>-->
+<!--                <button type="submit" name="delete_photo">Delete</button>-->
+<!--            </div>-->
             <div class="profile-info-container">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="Miller" required>
+                <label for="username">Login</label>
+                <input type="text" id="login" name="login" value="<?= $user->getLogin() ?>" required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="suzan@gmail.com" required>
+                <input type="email" id="email" name="email" value="<?= $user->getEmail() ?>" required>
 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" value="******">
-                <button type="button" onclick="changePassword()">Change</button>
+                <label for="password">Current password</label>
+                <input type="password" name="currentPassword" value="">
+
+                <label for="password">New password</label>
+                <input type="password" name="password" value="">
+
+                <label for="password">New password again</label>
+                <input type="password" name="confirmedPassword" value="">
             </div>
 
             <div class="profile-actions">
                 <button type="submit" name="save_profile">Save</button>
-                <button type="button" onclick="signOut()">Sign out</button>
+                <a class="sign-out" href="/logout">Sign out</a>
                 <button type="submit" name="delete_account" class="delete-account">Delete Account</button>
             </div>
         </form>
     </section>
-
-    <!-- Tu mogą się znaleźć inne sekcje, np. zarządzanie przepisami użytkownika -->
 </main>
 
 </body>

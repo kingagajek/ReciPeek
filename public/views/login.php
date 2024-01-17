@@ -9,10 +9,12 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="logo-container">
-            <img class="logo" src="public\images\logo.svg" alt="logo">
-            <h1> Reci<span class="text-peach">Peek</span></h1>
-        </div>
+        <a class="back-to-home" href="/home">
+            <div class="logo-container">
+                <img class="logo" src="public\images\logo.svg" alt="logo">
+                <h1> Reci<span class="text-peach">Peek</span></h1>
+            </div>
+        </a>
         <div class="form-container">
             <form class="login-form" action="login" method="POST">
                 <div class="message">

@@ -38,17 +38,17 @@ class SecurityController extends AppController {
 
         session_start();
         $_SESSION['user_email'] = $email;
-        $_SESSION['timeout'] = time() + 60;
+        $_SESSION['user_id'] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/editProfile");
+        header("Location: {$url}/home");
     }
 
     public function logout() {
         session_start();
 
         unset($_SESSION['user_email']);
-        unset($_SESSION['timeout']);
+        unset($_SESSION['user_id']);
 
         session_destroy();
 
@@ -86,17 +86,55 @@ class SecurityController extends AppController {
         exit;
     }
 
-    public function editProfile() {
+    public function editProfile()
+    {
         session_start();
 
-        if (isset($_SESSION['user_email']) && isset($_SESSION['timeout']) && $_SESSION['timeout'] > time()) {
-            return $this->render('edit-profile');
-        } else if (isset($_SESSION['timeout']) && $_SESSION['timeout'] <= time()) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/logout");
+        if (!$this->isPost()) {
+            if (isset($_SESSION['user_email'])) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUser($_SESSION['user_email'])]);
+            } else if (isset($_SESSION['timeout']) && $_SESSION['timeout'] <= time()) {
+                $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: {$url}/logout");
+            } else {
+                $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: {$url}/welcome");
+            }
         } else {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
+            $user_id = $_SESSION['user_id'];
+            $email = $_POST['email'];
+            $password = $_POST['currentPassword'];
+            $new_password = $_POST['password'] ?? null;
+            $confirm_new_password = $_POST['confirmedPassword'] ?? null;
+            $login = $_POST['login'] ?? null;
+            $user = $this->userRepository->getUserById($user_id);
+
+            if (!isset($email) || !$email) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Email is required!']);
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Invalid email address!']);
+            }
+
+            if (!isset($password) || !$password) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Password is required!']);
+            }
+
+            if (!password_verify($password, $user->getPassword())) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Wrong password!']);
+            }
+
+            if (isset($new_password) && isset($confirm_new_password) && $new_password !== $confirm_new_password) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Passwords do not match!']);
+            }
+
+            if (!$user) {
+                return $this->render('edit-profile', ['user' => $this->userRepository->getUserById($_SESSION['user_id']), 'messages' => 'Something went wrong!']);
+            }
+
+            $message = $this->userRepository->editUserData($user, $email, $new_password, $login) ? 'Profile updated successfully!' : 'Something went wrong, please try again.';
+            return $this->render('edit-profile', ['messages' => $message, 'user' => $this->userRepository->getUserById($_SESSION['user_id'])]);
         }
     }
 }

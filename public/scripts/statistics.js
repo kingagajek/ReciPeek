@@ -8,18 +8,22 @@ function rateRecipe() {
     fetch(`/rate?id=${recipeId}&rating=${rating}`)
         .then(data => data.json())
         .then(data => {
-            let recipeRatingsCount = 0;
-            let recipeRatingsSum = 0;
+            if (data.error_message) { alert(data.error_message) }
+            else {
 
-            for (const [key, value] of Object.entries(data)) {
-                recipeRatingsCount += parseInt(value);
-                recipeRatingsSum += parseInt(key) * parseInt(value);
+                let recipeRatingsCount = 0;
+                let recipeRatingsSum = 0;
+
+                for (const [key, value] of Object.entries(data)) {
+                    recipeRatingsCount += parseInt(value);
+                    recipeRatingsSum += parseInt(key) * parseInt(value);
+                }
+
+                let recipeRating = (recipeRatingsSum / recipeRatingsCount).toFixed(2);
+
+                container.querySelector('.recipe-rating-summary').innerText = `${recipeRating} (${recipeRatingsCount} ratings)`;
+                container.querySelector('.recipe-rating-stars-full').style.width = `${recipeRating / 5 * 100}%`;
             }
-
-            let recipeRating = (recipeRatingsSum / recipeRatingsCount).toFixed(2);
-
-            container.querySelector('.recipe-rating-summary').innerText = `${recipeRating} (${recipeRatingsCount} ratings)`;
-            container.querySelector('.recipe-rating-stars-full').style.width = `${recipeRating / 5 * 100}%`;
         });
 }
 

@@ -64,7 +64,7 @@ function createRecipe(recipe) {
     const time = clone.querySelector(".time-info span");
     time.innerHTML = recipe.cook_time + " mins";
     const difficulty = clone.querySelector(".difficulty-info span");
-    difficulty.innerHTML = recipe.level; //bedzie trzeba zgetowac difficulty
+    difficulty.innerHTML = recipe.level;
     const rating = clone.querySelector(".recipe-rating span");
     if (recipe.calculatedRating && recipe.ratingCount) {
         rating.innerHTML = `${recipe.calculatedRating} (${recipe.ratingCount} reviews)`;

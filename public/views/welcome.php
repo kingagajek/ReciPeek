@@ -8,8 +8,8 @@
     <title>Welcome to ReciPeek</title>
 </head>
 <body>
-    <div class="main-container"> 
-        <img class="logo" src="public\images\logo.svg" alt="logo">
+    <div class="main-container">
+        <a href="/home"><img class="logo" src="public\images\logo.svg" alt="logo"></a>
         <div class="welcome-message">
             <h1>Welcome to Reci<span class="text-peach">Peek</span></h1>
             <h2>Find your personalized recipe by one click</h2>

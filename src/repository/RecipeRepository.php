@@ -5,32 +5,6 @@ require_once __DIR__.'/../models/Recipe.php';
 require_once __DIR__ . '/../models/Nutrition.php';
 class RecipeRepository extends Repository
 {
-//    public function getRecipe(int $id): ?Recipe
-//    {
-//        $stmt = $this->database->connect()->prepare('
-//            SELECT * FROM public.recipe
-//s WHERE id = :id
-//        ');
-//        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-//        $stmt->execute();
-//
-//        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
-//
-//        if ($recipe == false) {
-//            return null;
-//        }
-//
-//        return new Recipe (
-//            $recipe['title'],
-//            $recipe['description'],
-//            $recipe['image'],
-//            $recipe['cook_time'],
-//            $recipe['serving_size'],
-//            $recipe['rating'],
-//            $recipe['id']
-//        );
-//    }
-
     public function addRecipe(Recipe $recipe): void
     {
         $date = new DateTime();
@@ -254,13 +228,32 @@ class RecipeRepository extends Repository
         return $difficultyStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function rate(int $id, int $rating) {
+    public function rate(int $id, int $rating, string $email) {
+        $get_user_id = $this->database->connect()->prepare("
+            SELECT id FROM users WHERE email = '".$email."'
+         ");
+
+        $get_user_id->execute();
+        $user_id = $get_user_id->fetch(PDO::FETCH_ASSOC);
+
         $select_stmt = $this->database->connect()->prepare('
-            SELECT rating FROM recipes WHERE id = '.$id.'
+            SELECT rating, ids_of_users_who_rated FROM recipes WHERE id = '.$id.'
          ');
 
         $select_stmt->execute();
-        $current_ratings = $select_stmt->fetch(PDO::FETCH_ASSOC)['rating'];
+        $result = $select_stmt->fetch(PDO::FETCH_ASSOC);
+        $ids_of_users_who_rated = $result['ids_of_users_who_rated'];
+
+        if (!empty($ids_of_users_who_rated)) {
+            $ids_of_users_who_rated_array = unserialize($ids_of_users_who_rated);
+
+            if (in_array($user_id, $ids_of_users_who_rated_array)) return ['error_message' => 'You have already rated this recipe.'];
+        }
+        else {
+            $ids_of_users_who_rated_array = [];
+        }
+
+        $current_ratings = $result['rating'];
 
         if (!$current_ratings) {
             $new_ratings = array(
@@ -276,8 +269,10 @@ class RecipeRepository extends Repository
 
         if (array_key_exists($rating, $new_ratings)) $new_ratings[$rating] += 1;
 
+        $ids_of_users_who_rated_array[] = $user_id;
+
         $stmt = $this->database->connect()->prepare("
-            UPDATE recipes SET rating = '".serialize($new_ratings)."' WHERE id = ".$id."
+            UPDATE recipes SET rating = '".serialize($new_ratings)."', ids_of_users_who_rated = '".serialize($ids_of_users_who_rated_array)."' WHERE id = ".$id."
          ");
         $stmt->execute();
 
@@ -286,21 +281,80 @@ class RecipeRepository extends Repository
 
     public function getMostRecentRecipes($limit = 10): array {
         $stmt = $this->database->connect()->prepare('
-        SELECT * FROM recipes ORDER BY created_at DESC LIMIT :limit;
-    ');
+            SELECT recipes.*, difficulty.level 
+            FROM recipes 
+            JOIN difficulty ON recipes.id_difficulty = difficulty.id 
+            ORDER BY created_at DESC LIMIT :limit;
+        ');
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as &$result) {
+            if (empty($result['rating'])) continue;
+
+            $recipe = new Recipe(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                $result['rating']
+            );
+
+            $recipeCalculatedRating = $recipe->getCalculatedRating();
+            $result['calculatedRating'] = $recipeCalculatedRating['rating'];
+            $result['ratingCount'] = $recipeCalculatedRating['rating_count'];
+        }
+
+        return $results;
     }
 
     public function getRecommendedRecipes($limit = 10): array {
-        // This example assumes you have a 'views' column to track the number of views
         $stmt = $this->database->connect()->prepare('
-        SELECT * FROM recipes ORDER BY views DESC LIMIT :limit;
-    ');
+            SELECT recipes.*, difficulty.level 
+            FROM recipes 
+            JOIN difficulty ON recipes.id_difficulty = difficulty.id 
+            ORDER BY views DESC LIMIT :limit;
+        ');
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as &$result) {
+            if (empty($result['rating'])) continue;
+
+            $recipe = new Recipe(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                $result['rating']
+            );
+
+            $recipeCalculatedRating = $recipe->getCalculatedRating();
+            $result['calculatedRating'] = $recipeCalculatedRating['rating'];
+            $result['ratingCount'] = $recipeCalculatedRating['rating_count'];
+        }
+
+        return $results;
+    }
+
+    public function incrementRecipeViews($recipeId) {
+        $stmt = $this->database->connect()->prepare('
+        SELECT increment_recipe_views(:id);
+    ');
+        $stmt->bindParam(':id', $recipeId, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
 }

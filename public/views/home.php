@@ -18,7 +18,7 @@
 </head>
 <body>
 <header>
-    <img class="logo" src="public\images\logo.svg" alt="logo">
+    <a href="/home"><img class="logo" src="public\images\logo.svg" alt="logo"></a>
     <div class="search-container">
         <img class="search-icon" src="public\images\search.svg" alt="search-icon">
         <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="header-buttons">
-        <img class="profile" src="public\images\profile.svg" alt="profile">
+        <a href="/editProfile"><img class="profile" src="public\images\profile.svg" alt="profile"></a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -51,7 +51,7 @@
                             <div class="recipe-title">
                                 <div class="recipe-rating">
                                     <img class="star-icon" src="public\images\star.png" alt="star-icon">
-                                    <span>4.5</span>
+                                    <span><?= $recipe['calculatedRating'] ?? 0; ?></span>
                                 </div>
                                 <h3><?= $recipe['title'] ?></h3>
                             </div>
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="difficulty-info">
                                     <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
-                                    <span>easy</span>
+                                    <span><?= $recipe['level']; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                             <div class="recipe-title">
                                 <div class="recipe-rating">
                                     <img class="star-icon" src="public\images\star.png" alt="star-icon">
-                                    <span>4.5</span>
+                                    <span><?= $recipe['calculatedRating'] ?? 0; ?></span>
                                 </div>
                                 <h3><?= $recipe['title'] ?></h3>
                             </div>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="difficulty-info">
                                     <img class="recipe-info-icon" src="public\images\difficulty.svg" alt="difficulty-icon">
-                                    <span>easy</span>
+                                    <span><?= $recipe['level']; ?></span>
                                 </div>
                             </div>
                         </div>

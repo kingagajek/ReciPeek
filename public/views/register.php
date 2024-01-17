@@ -3,17 +3,19 @@
 <head>
     <link rel="stylesheet" href="public\styles\global.css">
     <link rel="stylesheet" href="public\styles\login.css">
-    <script type="text/javascript" src="./public/scripts/script.js" defer></script>
+    <script type="text/javascript" src="./public/scripts/validation.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register to ReciPeek</title>
 </head>
 <body>
     <div class="login-container">
-        <div class="logo-container">
-            <img class="logo" src="public\images\logo.svg" alt="logo">
-            <h1> Reci<span class="text-peach">Peek</span></h1>
-        </div>
+        <a class="back-to-home" href="/home">
+            <div class="logo-container">
+                <img class="logo" src="public\images\logo.svg" alt="logo">
+                <h1> Reci<span class="text-peach">Peek</span></h1>
+            </div>
+        </a>
         <div class="form-container">
             <form method="post" action="" class="login-form">
                 <div class="form-inputs">
