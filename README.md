@@ -38,7 +38,7 @@ With ReciPeek, we are committed to ensuring that every user can find a dish that
 
 1. Open a terminal in the main project folder.
 2. Run the command: `docker-compose up`.
-3. Execute the database file provided: `ReciPeek.sql`.
+3. Execute the database file provided: `ReciPeekDB.sql`.
 4. Access the application in a web browser at `localhost:8080`.
 
 ## ERD Diagram
