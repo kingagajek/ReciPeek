@@ -6,10 +6,11 @@ ReciPeek offers a user-friendly recipe discovery platform for quick and easy acc
 ## Table of Contents
 
 - [About](#about)
+- [Technology Stack](#technology-stack)
 - [Setup](#setup)
-- [Demo](#demo)
+- [ERD Diagram](#ERD-diagram)
+- [Screenshots](#screenshots)
 - [Usage](#usage)
-- [License](#license)
 - [Contact](#contact)
 
 ## About
@@ -20,22 +21,43 @@ The project aims to create a community around cooking, where experiences, recipe
 
 With ReciPeek, we are committed to ensuring that every user can find a dish that fits their taste, dietary requirements, and skill level. Whether you are looking for a quick weeknight dinner idea or an elaborate meal to impress, ReciPeek is your go-to culinary resource.
 
+## Technology Stack
+- Docker
+- PostgreSQL
+- PHP
+- JavaScript
+- HTML5/CSS3
 
 ## Setup
 
-### Prerequisites
+### Requirements
 
-List the software and tools needed to run the project.
+- [Docker](https://www.docker.com/) installed on your machine.
 
 ### Installation
 
-Provide a step-by-step description of how to get a development environment running.
+1. Open a terminal in the main project folder.
+2. Run the command: `docker-compose up`.
+3. Execute the database file provided: `ReciPeek.sql`.
+4. Access the application in a web browser at `localhost:8080`.
 
-## Demo
+## ERD Diagram
+![Diagram-ERD](https://github.com/kingagajek/ReciPeek/assets/121556990/e035602a-4494-4384-beb6-e510c4a74d92)
 
-![Application Screenshot](url-to-screenshot.png)
 
-Include a few screenshots or a video that demonstrates the application's main features.
+## Screenshots
+- Welcome page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/43705758-caf8-43a9-866b-bb8c2b04c2b8)
+- Login page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/07cdc752-06e4-4857-8d86-6cb3498c9caa)
+- Home page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/bd1f44c6-8f1c-432f-82a5-1ec7629bdd7d)
+- Recipe page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/63528390-cf1b-4128-8e17-5e4e428df9bb)
+- Result page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/1152de7b-80ad-4717-8f33-800d50bde158)
+- Add Recipe page:
+![image](https://github.com/kingagajek/ReciPeek/assets/121556990/3623dd41-33ae-476f-95b5-85da332b23d5)
 
 ## Usage
 
@@ -62,10 +84,6 @@ As a registered user, you have the ability to rate recipes and provide feedback 
 1. Select a recipe by clicking on it to view the full details.
 2. Click on the number of stars you wish to award the recipe based on your experience.
 
-
-## License
-
-Short statement about the license, with a link to the full license text.
 
 ## Contact
 
