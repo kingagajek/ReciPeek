@@ -92,18 +92,3 @@ body {
     box-shadow: 0 0 0.2em red;
     outline: none;
 }
-
-@media (max-width: 768px) {
-    .search {
-        width: auto;
-    }
-
-    .profile-edit-section {
-        padding: 1rem;
-    }
-
-    header {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-}

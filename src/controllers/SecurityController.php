@@ -93,9 +93,6 @@ class SecurityController extends AppController {
         if (!$this->isPost()) {
             if (isset($_SESSION['user_email'])) {
                 return $this->render('edit-profile', ['user' => $this->userRepository->getUser($_SESSION['user_email'])]);
-            } else if (isset($_SESSION['timeout']) && $_SESSION['timeout'] <= time()) {
-                $url = "http://$_SERVER[HTTP_HOST]";
-                header("Location: {$url}/logout");
             } else {
                 $url = "http://$_SERVER[HTTP_HOST]";
                 header("Location: {$url}/welcome");

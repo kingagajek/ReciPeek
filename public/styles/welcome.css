@@ -41,3 +41,44 @@ body {
     margin-top: 8px;
     letter-spacing: 1.5px;
 }
+
+@media (max-width: 768px) {
+    body {
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .main-container {
+        gap: 80px;
+    }
+
+    .main-container img.logo {
+        height: 25vh;
+    }
+
+    .main-container .welcome-message h2 {
+        margin-top: 35px;
+    }
+
+    .main-container .buttons {
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 0;
+        width: 85%;
+    }
+
+    .main-container .buttons a {
+        width: 100%;
+    }
+
+    .button-bg-white, .button-bg-clear {
+        display: block;
+        padding: 15px;
+        margin: 5px 0;
+        border-radius: 15px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+}

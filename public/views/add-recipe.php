@@ -16,14 +16,16 @@
         <div class="search-container">
             <img class="search-icon" src="public\images\search.svg" alt="search-icon">
             <input class="search" type="search" id="search" name="search" placeholder="Search recipe">
+            <div class="dropdown-container">
+                <select id="search-type" name="search-type">
+                    <option value="by_recipe">By recipe</option>
+                    <option value="by_ingredients">By ingredients</option>
+                </select>
+            </div>
         </div>
         <div class="header-buttons">
-            <img class="profile" src="public\images\profile.svg" alt="profile">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="/editProfile"><img class="profile" src="public\images\profile.svg" alt="profile"></a>
+            <a href="/addRecipe"><img class="add-recipe-icon" src="public\images\plus.svg" alt="plus"></a>
         </div>
     </header>
 
@@ -37,7 +39,6 @@
         <!-- Step 1: Recipe Information -->
         <div class="main-info">
             <div class="image-upload-container">
-<!--                <input type="file" name="image" accept="image/*">-->
                 <div class="image-preview-container">
 
                 </div>

@@ -18,12 +18,12 @@
         <div class="form-container">
             <form class="login-form" action="login" method="POST">
                 <div class="message">
-                <?php if(isset($messages)) {
-                    foreach ($messages as $message) {
-                        echo $message;
+                    <?php if(isset($messages)) {
+                        foreach ($messages as $message) {
+                            echo $message;
+                        }
                     }
-                }
-                ?>
+                    ?>
                 </div>
                 <div class="form-inputs">
                     <input type="text" placeholder="E-mail" name="email" required>

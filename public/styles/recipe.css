@@ -409,10 +409,35 @@ h1, .recipe-title {
 }
 
 @media (max-width: 768px) {
+    .main-container {
+        padding: 0 28px;
+    }
+
+    .main-info {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .recipe-picture {
+        width: 100%;
+        max-width: unset;
+        min-width: unset;
+    }
+
+    .main-info-text {
+        gap: 10px;
+        padding: 0;
+    }
+
+    .recipe-info {
+        gap: 10px;
+        flex-direction: column;
+    }
+
     .recipe-content {
         flex-direction: column;
     }
     .ingredient-quantity, .ingredient-measurement {
-        max-width: 100px;
+        max-width: 100%;
     }
 }

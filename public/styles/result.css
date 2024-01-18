@@ -183,3 +183,47 @@ body {
     align-items: center;
     gap: 8px;
 }
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 0 28px;
+        gap: 30px;
+    }
+
+    .main-container .option-buttons {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .filter-select.active {
+        z-index: 1;
+    }
+
+    .sort-button, .filter-button {
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+    }
+
+    .filter-menu.active {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .filter-menu .filter-select {
+        width: 100%;
+    }
+
+    .recipe-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .recipe-card-link {
+        width: 100%;
+    }
+
+    .recipe-card {
+        flex-direction: column;
+    }
+}

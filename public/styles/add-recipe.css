@@ -79,16 +79,15 @@ body {
 }
 
 .nutrition-inputs input {
-    flex: 1; /* Makes inputs take equal space */
-    min-width: 100px; /* Minimum width of the inputs */
+    flex: 1;
+    min-width: 100px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* Styles for the submit button */
 .submit-button {
-    background-color: #fa8072; /* Change to match your theme color */
+    background-color: #fa8072;
     color: white;
     padding: 12px 24px;
     font-size: 1em;
@@ -98,7 +97,6 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
 
 .recipe-info {
     display: flex;
@@ -283,9 +281,7 @@ body {
     }
 }
 
-/* New styles for the editable form */
 .upload-image input[type="file"] {
-    /* Style for image upload input */
 }
 
 .recipe-details input[type="text"],
@@ -306,10 +302,9 @@ body {
 
 .instructions-form textarea {
     height: 80px;
-    resize: none; /* Instructions are typically shorter, so no resize */
+    resize: none;
 }
 
-/* Step numbering */
 .step-1-of-3:before,
 .step-2-of-3:before,
 .step-3-of-3:before {
@@ -319,7 +314,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Submit button */
 button[type="submit"] {
     padding: 10px 20px;
     background-color: var(--color-bg-gradient-dark);
@@ -328,4 +322,10 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-info {
+        flex-direction: column;
+    }
 }

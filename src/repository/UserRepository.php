@@ -19,10 +19,10 @@ class UserRepository extends Repository
         }
 
         return new User(
-            $user['id'],
             $user['login'],
             $user['email'],
             $user['password'],
+            $user['id']
         );
     }
 
@@ -41,17 +41,15 @@ class UserRepository extends Repository
         }
 
         return new User(
-            $user['id'],
             $user['login'],
             $user['email'],
             $user['password'],
+            $user['id']
         );
     }
 
     public function addUser(User $user): void
     {
-        $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
-
         $stmt = $this->database->connect()->prepare('
         INSERT INTO "users" (email, password, created_at, login)
         VALUES (?, ?, ?, ?)

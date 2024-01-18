@@ -135,7 +135,7 @@ body {
 
 .slick-prev,
 .slick-next {
-    font-size: 0; /* Ensures that the default text is not visible */
+    font-size: 0;
     line-height: 0;
     position: absolute;
     top: 50%;
@@ -146,41 +146,61 @@ body {
     -ms-transform: translate(0,-50%);
     transform: translate(0,-50%);
     cursor: pointer;
-    background-color: #333; /* Dark background for visibility */
-    border-radius: 50%; /* Circular background */
+    background-color: #333;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.8; /* Semi-transparency */
-    z-index: 25; /* Make sure it's above other elements */
-    border: none; /* Remove default borders */
+    opacity: 0.8;
+    z-index: 25;
+    border: none;
 }
 
 .slick-prev:hover,
 .slick-next:hover {
-    opacity: 1; /* Full visibility on hover */
+    opacity: 1;
 }
 
 .slick-prev {
-    left: 25px; /* Adjust as per your layout */
+    left: 25px;
 }
 
 .slick-next {
-    right: 25px; /* Adjust as per your layout */
+    right: 25px;
 }
 
 .slick-prev:before,
 .slick-next:before {
-    font-family: 'slick'; /* Use slick's font family */
-    font-size: 20px; /* Adjust arrow size */
+    font-family: 'slick';
+    font-size: 20px;
     line-height: 1;
     color: white;
     opacity: .75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    content: '<'; /* Default arrow text, you can use an arrow character here */
+    content: '<';
 }
 
 .slick-next:before {
-    content: '>'; /* Default arrow text, you can use an arrow character here */
+    content: '>';
+}
+
+@media (max-width: 768px) {
+    .recommended-recipes .recipe-grid,
+    .recent-recipes .recipe-grid {
+        gap: 10px;
+        padding: 0 60px;
+    }
+
+    .recipe-title h3 {
+        font-size: 0.9em;
+    }
+
+    .slick-prev {
+        left: 15px;
+    }
+
+    .slick-next {
+        right: 15px;
+    }
 }

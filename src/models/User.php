@@ -6,11 +6,11 @@ class User {
     private $email;
     private $password;
 
-    public function __construct (int $id, string $login, string $email, string $password) {
-        $this->id = $id;
+    public function __construct (string $login, string $email, string $password, int $id = null) {
         $this->login = $login;
         $this->email = $email;
         $this->password = $password;
+        $this->id = $id;
     }
 
     public function getId(): int

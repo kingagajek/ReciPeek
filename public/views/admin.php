@@ -13,11 +13,7 @@
     <a href="/home"><img class="logo" src="public\images\logo.svg" alt="logo"></a>
     <div class="header-buttons">
         <img class="profile" src="public\images\profile.svg" alt="profile">
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <a href="/addRecipe"><img class="add-recipe-icon" src="public\images\plus.svg" alt="plus"></a>
     </div>
 </header>
 

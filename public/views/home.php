@@ -31,11 +31,7 @@
     </div>
     <div class="header-buttons">
         <a href="/editProfile"><img class="profile" src="public\images\profile.svg" alt="profile"></a>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <a href="/addRecipe"><img class="add-recipe-icon" src="public\images\plus.svg" alt="plus"></a>
     </div>
 </header>
 

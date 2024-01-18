@@ -20,7 +20,9 @@ class Routing {
         $urlParts = explode("/", $url);
         $action = $urlParts[0];
 
-        if(!array_key_exists($action, self::$routes)) {
+        if ($action === '') {
+            $action = 'home';
+        } else if(!array_key_exists($action, self::$routes)) {
             die("Wrong url!");
         }
 

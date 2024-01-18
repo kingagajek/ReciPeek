@@ -17,6 +17,14 @@
             </div>
         </a>
         <div class="form-container">
+            <div class="message">
+                <?php if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
             <form method="post" action="" class="login-form">
                 <div class="form-inputs">
                     <input type="text" placeholder="Login" name="login" required>

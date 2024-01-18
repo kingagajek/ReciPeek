@@ -6,7 +6,6 @@ require_once __DIR__ . '/../repository/RecipeRepository.php';
 
 class RecipeController extends AppController
 {
-
     const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
@@ -35,6 +34,7 @@ class RecipeController extends AppController
 
     public function addRecipe()
     {
+        session_start();
         if ($this->isPost() && is_uploaded_file($_FILES['image']['tmp_name']) && $this->validate($_FILES['image'])) {
             move_uploaded_file(
                 $_FILES['image']['tmp_name'],
@@ -68,7 +68,13 @@ class RecipeController extends AppController
 
             return $this->home();
         }
-        return $this->render('add-recipe', ['messages' => $this->message]);
+        elseif (!isset($_SESSION['user_email'])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/welcome");
+        }
+        else {
+            return $this->render('add-recipe', ['messages' => $this->message]);
+        }
     }
 
     public function search()
